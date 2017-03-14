@@ -22,6 +22,10 @@ https://github.com/google/ExoPlayer
     return (
       <Video
         ...
+        source={
+            uri: ...    // like the "normal" videoplayer
+            cache: true // enable video caching up to 100MB, default false
+        }
         disableFocus={true} // disables audio focus and wake lock (default false)
         onAudioBecomingNoisy={this.onAudioBecomingNoisy} // Callback when audio is becoming noisy - should pause video
         onAudioFocusChanged={this.onAudioFocusChanged} // Callback when audio focus has been lost - pause if focus has been lost

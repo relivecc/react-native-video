@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import com.brentvatne.react.R;
 import com.brentvatne.receiver.AudioBecomingNoisyReceiver;
 import com.brentvatne.receiver.BecomingNoisyListener;
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.google.android.exoplayer2.C;
@@ -89,6 +90,7 @@ class ReactExoplayerView extends FrameLayout implements
     // Props from React
     private Uri srcUri;
     private String extension;
+    private boolean cache;
     private boolean repeat;
     private boolean disableFocus;
     // \ End props
@@ -202,6 +204,12 @@ class ReactExoplayerView extends FrameLayout implements
             playerNeedsSource = true;
         }
         if (playerNeedsSource && srcUri != null) {
+            if (this.cache == true) {
+                String proxyUriString = ProxyFactory.getProxy(themedReactContext).getProxyUrl(srcUri.toString());
+                srcUri = Uri.parse(proxyUriString);
+                Log.d(TAG, "Caching video " + srcUri.toString());
+            }
+
             MediaSource mediaSource = buildMediaSource(srcUri, extension);
             mediaSource = repeat ? new LoopingMediaSource(mediaSource) : mediaSource;
             boolean haveResumePosition = resumeWindow != C.INDEX_UNSET;
@@ -531,6 +539,10 @@ class ReactExoplayerView extends FrameLayout implements
                 reloadSource();
             }
         }
+    }
+
+    public void setCache(final boolean cache) {
+        this.cache = cache;
     }
 
     public void setRawSrc(final Uri uri, final String extension) {

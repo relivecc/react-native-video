@@ -21,6 +21,7 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
 
     private static final String PROP_SRC = "src";
     private static final String PROP_SRC_URI = "uri";
+    private static final String PROP_SRC_CACHE = "cache";
     private static final String PROP_SRC_TYPE = "type";
     private static final String PROP_RESIZE_MODE = "resizeMode";
     private static final String PROP_REPEAT = "repeat";
@@ -70,6 +71,7 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
     public void setSrc(final ReactExoplayerView videoView, @Nullable ReadableMap src) {
         Context context = videoView.getContext().getApplicationContext();
         String uriString = src.hasKey(PROP_SRC_URI) ? src.getString(PROP_SRC_URI) : null;
+        boolean cache = src.hasKey(PROP_SRC_CACHE) ? src.getBoolean(PROP_SRC_CACHE) : false;
         String extension = src.hasKey(PROP_SRC_TYPE) ? src.getString(PROP_SRC_TYPE) : null;
 
         if (TextUtils.isEmpty(uriString)) {
@@ -81,6 +83,7 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
 
             if (srcUri != null) {
                 videoView.setSrc(srcUri, extension);
+                videoView.setCache(cache);
             }
         } else {
             int identifier = context.getResources().getIdentifier(
