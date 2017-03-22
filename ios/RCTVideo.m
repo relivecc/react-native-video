@@ -37,6 +37,7 @@ static NSString *const timedMetadata = @"timedMetadata";
   /* Keep track of any modifiers, need to be applied after each play */
   float _volume;
   float _rate;
+  BOOL _cache;
   BOOL _muted;
   BOOL _paused;
   BOOL _repeat;
@@ -55,6 +56,7 @@ static NSString *const timedMetadata = @"timedMetadata";
 
     _playbackRateObserverRegistered = NO;
     _playbackStalled = NO;
+    _cache = false;
     _rate = 1.0;
     _volume = 1.0;
     _resizeMode = @"AVLayerVideoGravityResizeAspectFill";
@@ -297,6 +299,7 @@ static NSString *const timedMetadata = @"timedMetadata";
 {
   bool isNetwork = [RCTConvert BOOL:[source objectForKey:@"isNetwork"]];
   bool isAsset = [RCTConvert BOOL:[source objectForKey:@"isAsset"]];
+  _cache = [RCTConvert BOOL:[source objectForKey:@"cache"]];
   NSString *uri = [source objectForKey:@"uri"];
   NSString *type = [source objectForKey:@"type"];
 
@@ -469,6 +472,28 @@ static NSString *const timedMetadata = @"timedMetadata";
     AVPlayerItem *item = [notification object];
     [item seekToTime:kCMTimeZero];
     [self applyModifiers];
+  }
+
+  if (_cache) {
+    NSLog(@"cache enabled");
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:[[notification object] asset] presetName:AVAssetExportPresetHighestQuality];
+ 
+    NSString *filename = @"&amp;quot;filename.mp4&amp;quot";
+    NSLog(filename);
+    
+    NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsURL = URLs[0];
+    NSURL *outputURL = [documentsURL URLByAppendingPathComponent:filename];
+    
+    NSLog(@"caching %@", outputURL);
+
+    exporter.outputURL = outputURL;
+    exporter.outputFileType = AVFileTypeMPEG4;
+    
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+        //NSLog([[exporter status] rawValue]);
+        NSLog([exporter error]);
+    }];
   }
 }
 
