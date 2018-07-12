@@ -347,18 +347,22 @@ static NSString *const timedMetadata = @"timedMetadata";
     
     RCTVideoCache *sharedCache = [RCTVideoCache sharedCache];
     if ([sharedCache.videoCache objectForKey:uri]) {
+      NSLog(@"Preloaded cache file");
       asset = sharedCache.videoCache[uri];
     } else {
+      NSLog(@"AVURLAsset isNetwork");
       asset = [AVURLAsset URLAssetWithURL:url options:assetOptions];
     }
     [asset.resourceLoader setDelegate:self queue:dispatch_get_main_queue()];
     return [AVPlayerItem playerItemWithAsset:asset];
   }
   else if (isAsset) {
+    NSLog(@"AVURLAsset isAsset");
     asset = [AVURLAsset URLAssetWithURL:url options:nil];
     return [AVPlayerItem playerItemWithAsset:asset];
   }
 
+  NSLog(@"playerItemWithURL loading");
   return [AVPlayerItem playerItemWithURL:url];
 }
 

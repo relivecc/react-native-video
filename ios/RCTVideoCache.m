@@ -52,8 +52,8 @@ RCT_EXPORT_METHOD(preloadVideo:(NSString *)url)
         for (NSString *thisKey in keys) {
             NSError *error = nil;
             AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
-            if (keyStatus == AVKeyValueStatusFailed) {
-                NSLog(@"Cache failed");
+            if (keyStatus != AVKeyValueStatusLoaded) {
+                NSLog(@"Cache %@", keyStatus);
                 return;
             }
         }
