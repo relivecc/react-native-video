@@ -533,10 +533,10 @@ static NSString *const timedMetadata = @"timedMetadata";
   NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
   NSString *filename = [NSString stringWithFormat:@"%@.mp4", timeStampObj];
 
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [paths lastObject];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+  NSString *cachesDirectory = [paths lastObject];
 
-  NSString *outputPath = [documentsDirectory stringByAppendingPathComponent: filename];
+  NSString *outputPath = [cachesDirectory stringByAppendingPathComponent: filename];
   NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
 
   exporter.outputURL = outputURL;
