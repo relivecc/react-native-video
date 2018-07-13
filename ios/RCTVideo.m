@@ -528,7 +528,10 @@ static NSString *const timedMetadata = @"timedMetadata";
   if(self.onVideoSaved) {
   AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
 
-  NSString *filename = @"filename.mp4";
+  NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+  // NSTimeInterval is defined as double
+  NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+  NSString *filename = [NSString stringWithFormat:@"%@.mp4", timeStampObj];
 
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsDirectory = [paths lastObject];
