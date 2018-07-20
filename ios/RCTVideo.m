@@ -442,6 +442,9 @@ static NSString *const timedMetadata = @"timedMetadata";
         
         [self attachListeners];
         [self applyModifiers];
+
+        // Note: this makes the video play the first 3/4 seconds immediately, and then starts buffering again. Is this better than waiting 3min and then play all?
+        [_player playImmediatelyAtRate: 1.0];
       } else if (_playerItem.status == AVPlayerItemStatusFailed && self.onVideoError) {
         self.onVideoError(@{@"error": @{@"code": [NSNumber numberWithInteger: _playerItem.error.code],
                                         @"domain": _playerItem.error.domain},
