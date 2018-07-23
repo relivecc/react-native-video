@@ -69,6 +69,7 @@ RCT_EXPORT_METHOD(preloadVideo:(NSString *)url)
 
         dispatch_async(dispatch_get_main_queue(), ^ {
             NSLog(@"Cache succeeded");
+            // TODO it doesn't seem the entire video is loaded yet at this point
             sharedCache.videoCache[url] = asset;
         });
     }];
