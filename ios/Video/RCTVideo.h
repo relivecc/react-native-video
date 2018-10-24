@@ -5,7 +5,7 @@
 #import "RCTVideoPlayerViewController.h"
 #import "RCTVideoPlayerViewControllerDelegate.h"
 
-#import <react-native-video/RCTVideoCache.h>
+#import "RCTVideoCache.h"
 #import <DVAssetLoaderDelegate/DVURLAsset.h>
 #import <DVAssetLoaderDelegate/DVAssetLoaderDelegate.h>
 
