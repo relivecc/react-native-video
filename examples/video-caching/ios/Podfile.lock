@@ -9,12 +9,9 @@ PODS:
   - glog (0.3.4)
   - React (0.56.0):
     - React/Core (= 0.56.0)
-  - react-native-video/Video (3.1.0):
-    - React
-  - react-native-video/VideoCaching (3.1.0):
+  - react-native-video (3.2.0):
     - DVAssetLoaderDelegate (~> 0.3.1)
     - React
-    - react-native-video/Video
     - SPTPersistentCache (~> 1.1.0)
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
@@ -73,7 +70,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/GLog.podspec`)
-  - react-native-video/VideoCaching (from `../node_modules/react-native-video/react-native-video.podspec`)
+  - react-native-video (from `../node_modules/react-native-video/react-native-video.podspec`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -119,10 +116,10 @@ SPEC CHECKSUMS:
   Folly: c89ac2d5c6ab169cd7397ef27485c44f35f742c7
   glog: b3b0330915eccea41c5cc9731a77cf564a9be5ea
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-video: 44c6befbc1526283ca1919891fcebe4680feade4
+  react-native-video: 772ae2698c177bc0d5a0b0110e6ac71b2aa0d92d
   SPTPersistentCache: df36ea46762d7cf026502bbb86a8b79d0080dff4
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: f4123c35c77493d6ddbcb86898737abdf5e0fac8
+PODFILE CHECKSUM: a72d15643ecf681eee8bfdb9918eaa0cba0620f7
 
 COCOAPODS: 1.5.3
