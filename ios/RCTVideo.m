@@ -449,8 +449,6 @@ static int const RCTVideoUnset = -1;
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     [assetOptions setObject:cookies forKey:AVURLAssetHTTPCookiesKey];
 
-    // suspect this might be only happening on the simulator?
-    // if (!_textTracks && ![uri containsString:@"http://localhost"] && ![uri containsString:@"https://localhost"]) {
     if (!_textTracks) {
       /* The DVURLAsset created by cache doesn't have a tracksWithMediaType property, so trying
        *  to bring in the text track code will crash. I suspect this is because the asset hasn't fully loaded.
