@@ -494,11 +494,18 @@ static int const RCTVideoUnset = -1;
                     // See note in playerItemForSource about not being able to support text tracks & caching
                     handler([AVPlayerItem playerItemWithAsset:cachedAsset]);
                     return;
+                } else {
+                  DebugLog(@"URI '%@' not found in cache. Playing back from source", uri);
+                  if ([uri containsString:@"http://localhost"]) {
+                    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
+                    [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
+                  } else {
+                    DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
+                    asset.loaderDelegate = self;
+                    handler([AVPlayerItem playerItemWithAsset:asset]);
+                  }
                 }
         }
-        DebugLog(@"URI '%@' not found in cache. Playing back from source", uri);
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
-        [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
         /* More granular code to have control over the DVURLAsset
         DVAssetLoaderDelegate *resourceLoaderDelegate = [[DVAssetLoaderDelegate alloc] initWithURL:url];
         resourceLoaderDelegate.delegate = self;
@@ -515,6 +522,7 @@ static int const RCTVideoUnset = -1;
 - (void)dvAssetLoaderDelegate:(DVAssetLoaderDelegate *)loaderDelegate
                   didLoadData:(NSData *)data
                        forURL:(NSURL *)url {
+    DebugLog(@"dvAssetLoaderDelegate: url '%@'", [url absoluteString]);
     [_videoCache storeItem:data forUri:[url absoluteString] withCallback:^(BOOL success) {
         DebugLog(@"Cache data stored successfully 🎉");
     }];
