@@ -497,12 +497,10 @@ static int const RCTVideoUnset = -1;
                     handler([AVPlayerItem playerItemWithAsset:cachedAsset]);
                     return;
                 }
+        }
+        DebugLog(@"URI '%@' not found in cache. Playing back from source", uri);
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
-        [self playerItemPrepareText:asset assetOptions:options withCallback:handler];        }
-
-        // DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
-        // asset.loaderDelegate = self;
-        
+        [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
         /* More granular code to have control over the DVURLAsset
         DVAssetLoaderDelegate *resourceLoaderDelegate = [[DVAssetLoaderDelegate alloc] initWithURL:url];
         resourceLoaderDelegate.delegate = self;
@@ -511,8 +509,6 @@ static int const RCTVideoUnset = -1;
         AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[components URL] options:options];
         [asset.resourceLoader setDelegate:resourceLoaderDelegate queue:dispatch_get_main_queue()];
         */
-
-        // handler([AVPlayerItem playerItemWithAsset:asset]);
     }];
 }
 
