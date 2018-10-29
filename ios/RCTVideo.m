@@ -449,9 +449,9 @@ static int const RCTVideoUnset = -1;
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     [assetOptions setObject:cookies forKey:AVURLAssetHTTPCookiesKey];
 
-    // Commenting these out because it seems to be breaking local files
     // suspect this might be only happening on the simulator?
-    if (!_textTracks && ![uri containsString:@"http://localhost"] && ![uri containsString:@"https://localhost"]) {
+    // if (!_textTracks && ![uri containsString:@"http://localhost"] && ![uri containsString:@"https://localhost"]) {
+    if (!_textTracks) {
       /* The DVURLAsset created by cache doesn't have a tracksWithMediaType property, so trying
        *  to bring in the text track code will crash. I suspect this is because the asset hasn't fully loaded.
        * Until this is fixed, we need to bypass caching when text tracks are specified.
@@ -497,10 +497,11 @@ static int const RCTVideoUnset = -1;
                     handler([AVPlayerItem playerItemWithAsset:cachedAsset]);
                     return;
                 }
-        }
+        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
+        [self playerItemPrepareText:asset assetOptions:options withCallback:handler];        }
 
-        DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
-        asset.loaderDelegate = self;
+        // DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
+        // asset.loaderDelegate = self;
         
         /* More granular code to have control over the DVURLAsset
         DVAssetLoaderDelegate *resourceLoaderDelegate = [[DVAssetLoaderDelegate alloc] initWithURL:url];
@@ -511,7 +512,7 @@ static int const RCTVideoUnset = -1;
         [asset.resourceLoader setDelegate:resourceLoaderDelegate queue:dispatch_get_main_queue()];
         */
 
-        handler([AVPlayerItem playerItemWithAsset:asset]);
+        // handler([AVPlayerItem playerItemWithAsset:asset]);
     }];
 }
 
