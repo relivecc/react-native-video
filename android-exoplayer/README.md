@@ -17,12 +17,11 @@ https://github.com/google/ExoPlayer
 ## ExoPlayer only props
 
 ```javascript
-
   render() {
     return (
       <Video
         ...
-        disableFocus={true} // disables audio focus and wake lock (default false)
+        disableFocus={true} // disables audio focus and wake lock (default true)
         onAudioBecomingNoisy={this.onAudioBecomingNoisy} // Callback when audio is becoming noisy - should pause video
         onAudioFocusChanged={this.onAudioFocusChanged} // Callback when audio focus has been lost - pause if focus has been lost
       />
@@ -43,4 +42,3 @@ https://github.com/google/ExoPlayer
 ## Unimplemented props
 
 - Expansion file - `source={{ mainVer: 1, patchVer: 0 }}`
-
