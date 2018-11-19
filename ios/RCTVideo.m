@@ -496,7 +496,7 @@ static int const RCTVideoUnset = -1;
                     return;
                 } else {
                   DebugLog(@"URI '%@' not found in cache. Playing back from source", uri);
-                  if ([uri containsString:@"http://localhost"]) {
+                  if ([uri containsString:@":8081"]) {
                     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
                     [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
                   } else {
