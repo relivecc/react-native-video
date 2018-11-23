@@ -6,8 +6,8 @@
 #import "RCTVideoPlayerViewControllerDelegate.h"
 
 #import "RCTVideoCache.h"
-#import <DVAssetLoaderDelegate/DVURLAsset.h>
-#import <DVAssetLoaderDelegate/DVAssetLoaderDelegate.h>
+#import "DVURLAsset.h"
+#import "DVAssetLoaderDelegate.h"
 
 @class RCTEventDispatcher;
 
