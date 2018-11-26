@@ -10,6 +10,7 @@ static NSString *const statusKeyPath = @"status";
 static NSString *const playbackLikelyToKeepUpKeyPath = @"playbackLikelyToKeepUp";
 static NSString *const playbackBufferEmptyKeyPath = @"playbackBufferEmpty";
 static NSString *const readyForDisplayKeyPath = @"readyForDisplay";
+static NSString *const loadedTimeRangesKeyPath = @"loadedTimeRanges";
 static NSString *const playbackRate = @"rate";
 static NSString *const timedMetadata = @"timedMetadata";
 
@@ -53,6 +54,7 @@ static int const RCTVideoUnset = -1;
   BOOL _paused;
   BOOL _repeat;
   BOOL _allowsExternalPlayback;
+  Float64 _forwardBufferMs;
   NSArray * _textTracks;
   NSDictionary * _selectedTextTrack;
   NSDictionary * _selectedAudioTrack;
@@ -288,6 +290,7 @@ static int const RCTVideoUnset = -1;
   [_playerItem addObserver:self forKeyPath:statusKeyPath options:0 context:nil];
   [_playerItem addObserver:self forKeyPath:playbackBufferEmptyKeyPath options:0 context:nil];
   [_playerItem addObserver:self forKeyPath:playbackLikelyToKeepUpKeyPath options:0 context:nil];
+  [_playerItem addObserver:self forKeyPath:loadedTimeRangesKeyPath options:0 context:nil];
   [_playerItem addObserver:self forKeyPath:timedMetadata options:NSKeyValueObservingOptionNew context:nil];
   _playerItemObserversSet = YES;
 }
@@ -301,6 +304,7 @@ static int const RCTVideoUnset = -1;
     [_playerItem removeObserver:self forKeyPath:statusKeyPath];
     [_playerItem removeObserver:self forKeyPath:playbackBufferEmptyKeyPath];
     [_playerItem removeObserver:self forKeyPath:playbackLikelyToKeepUpKeyPath];
+    [_playerItem removeObserver:self forKeyPath:loadedTimeRangesKeyPath];
     [_playerItem removeObserver:self forKeyPath:timedMetadata];
     _playerItemObserversSet = NO;
   }
@@ -329,13 +333,13 @@ static int const RCTVideoUnset = -1;
         [_player removeObserver:self forKeyPath:playbackRate context:nil];
         _playbackRateObserverRegistered = NO;
       }
-        
+
       _player = [AVPlayer playerWithPlayerItem:_playerItem];
       _player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
         
       [_player addObserver:self forKeyPath:playbackRate options:0 context:nil];
       _playbackRateObserverRegistered = YES;
-        
+
       [self addPlayerTimeObserver];
         
       //Perform on next run loop, otherwise onVideoLoadStart is nil
@@ -621,6 +625,11 @@ static int const RCTVideoUnset = -1;
       }
       _playerBufferEmpty = NO;
       self.onVideoBuffer(@{@"isBuffering": @(NO), @"target": self.reactTag});
+    } else if ([keyPath isEqualToString:loadedTimeRangesKeyPath]) {
+      double buffered = [[self calculatePlayableDuration] doubleValue] - [[NSNumber numberWithFloat:CMTimeGetSeconds(_player.currentTime)] doubleValue];
+     if (_forwardBufferMs && buffered >= (_forwardBufferMs / 1000) && !_paused) {
+       [_player playImmediatelyAtRate:1];
+     }
     }
   } else if (object == _playerLayer) {
     if([keyPath isEqualToString:readyForDisplayKeyPath] && [change objectForKey:NSKeyValueChangeNewKey]) {
@@ -1184,6 +1193,11 @@ static int const RCTVideoUnset = -1;
     [self removePlayerTimeObserver];
     [self addPlayerTimeObserver];
   }
+}
+
+- (void)setForwardBufferMs:(float)forwardBufferMs
+{
+    _forwardBufferMs = forwardBufferMs;
 }
 
 - (void)removePlayerLayer
