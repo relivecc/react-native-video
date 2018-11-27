@@ -378,7 +378,6 @@ Video.propTypes = {
     bufferForPlaybackMs: PropTypes.number,
     bufferForPlaybackAfterRebufferMs: PropTypes.number,
   }),
-  forwardBufferMs: PropTypes.number,
   stereoPan: PropTypes.number,
   rate: PropTypes.number,
   playInBackground: PropTypes.bool,
