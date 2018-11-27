@@ -293,17 +293,19 @@ playbackAfterRebufferMs | number | The default duration of media that must be bu
 
 This prop should only be set when you are setting the source, changing it after the media is loaded will cause it to be reloaded.
 
+On iOS, only `bufferForPlaybackMs` and `bufferForPlaybackAfterRebufferMs` is supported. If these values are not specified, or no `bufferConfig` is supplied, then the default AVPlayer buffering is used. This behaviour tries to determine whether the video item is likely to play through given the current buffer rate, and if so, the video starts to play.
+
 Example with default values:
 ```
 bufferConfig={{
-  minBufferMs: 15000,
-  maxBufferMs: 50000,
+  minBufferMs: 15000, // not supported on iOS
+  maxBufferMs: 50000, // not supported on iOS
   bufferForPlaybackMs: 2500,
   bufferForPlaybackAfterRebufferMs: 5000
 }}
 ```
 
-Platforms: Android ExoPlayer
+Platforms: Android ExoPlayer, iOS
 
 #### ignoreSilentSwitch
 Controls the iOS silent switch behavior
