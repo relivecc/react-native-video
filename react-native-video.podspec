@@ -15,21 +15,11 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
 
-  s.subspec "Video" do |ss|
-    ss.source_files  = "ios/Video/*.{h,m}"
-    s.static_framework = true
-  end
+  s.dependency "SPTPersistentCache", "~> 1.1.0"
+  s.dependency "DVAssetLoaderDelegate", "~> 0.3.1"
 
-  s.subspec "VideoCaching" do |ss|
-    ss.dependency "react-native-video/Video"
-    ss.dependency "SPTPersistentCache", "~> 1.1.0"
-    ss.dependency "DVAssetLoaderDelegate", "~> 0.3.1"
-
-    ss.source_files = "ios/VideoCaching/**/*.{h,m}"
-    s.static_framework = true
-  end
+  s.source_files = "ios/**/*.{h,m}"
+  s.static_framework = true
 
   s.dependency "React"
-
-  s.default_subspec = "Video"
 end

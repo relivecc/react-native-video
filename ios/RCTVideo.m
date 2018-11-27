@@ -63,9 +63,7 @@ static int const RCTVideoUnset = -1;
   NSString * _resizeMode;
   BOOL _fullscreenPlayerPresented;
   UIViewController * _presentingViewController;
-#if __has_include(<react-native-video/RCTVideoCache.h>)
   RCTVideoCache * _videoCache;
-#endif
 }
 
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
@@ -88,9 +86,7 @@ static int const RCTVideoUnset = -1;
     _allowsExternalPlayback = YES;
     _playWhenInactive = false;
     _ignoreSilentSwitch = @"inherit"; // inherit, ignore, obey
-#if __has_include(<react-native-video/RCTVideoCache.h>)
     _videoCache = [RCTVideoCache sharedInstance];
-#endif
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive:)
                                                  name:UIApplicationWillResignActiveNotification
@@ -453,7 +449,6 @@ static int const RCTVideoUnset = -1;
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     [assetOptions setObject:cookies forKey:AVURLAssetHTTPCookiesKey];
 
-#if __has_include(<react-native-video/RCTVideoCache.h>)
     if (!_textTracks) {
       /* The DVURLAsset created by cache doesn't have a tracksWithMediaType property, so trying
        *  to bring in the text track code will crash. I suspect this is because the asset hasn't fully loaded.
@@ -463,8 +458,6 @@ static int const RCTVideoUnset = -1;
       [self playerItemForSourceUsingCache:uri assetOptions:assetOptions withCallback:handler];
       return;
     }
-#endif
-
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:assetOptions];
     [self playerItemPrepareText:asset assetOptions:assetOptions withCallback:handler];
     return;
@@ -478,7 +471,6 @@ static int const RCTVideoUnset = -1;
   [self playerItemPrepareText:asset assetOptions:assetOptions withCallback:handler];
 }
 
-#if __has_include(<react-native-video/RCTVideoCache.h>)
 
 - (void)playerItemForSourceUsingCache:(NSString *)uri assetOptions:(NSDictionary *)options withCallback:(void(^)(AVPlayerItem *))handler {
     NSURL *url = [NSURL URLWithString:uri];
@@ -500,14 +492,20 @@ static int const RCTVideoUnset = -1;
                 if (cachedAsset) {
                     DebugLog(@"Playing back uri '%@' from cache", uri);
                     // See note in playerItemForSource about not being able to support text tracks & caching
-                    handler([AVPlayerItem playerItemWithAsset:asset]);
+                    handler([AVPlayerItem playerItemWithAsset:cachedAsset]);
                     return;
+                } else {
+                  DebugLog(@"URI '%@' not found in cache. Playing back from source", uri);
+                  if ([uri containsString:@":8081"]) {
+                    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
+                    [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
+                  } else {
+                    DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
+                    asset.loaderDelegate = self;
+                    handler([AVPlayerItem playerItemWithAsset:asset]);
+                  }
                 }
         }
-
-        DVURLAsset *asset = [[DVURLAsset alloc] initWithURL:url options:options networkTimeout:10000];
-        asset.loaderDelegate = self;
-        
         /* More granular code to have control over the DVURLAsset
         DVAssetLoaderDelegate *resourceLoaderDelegate = [[DVAssetLoaderDelegate alloc] initWithURL:url];
         resourceLoaderDelegate.delegate = self;
@@ -516,8 +514,6 @@ static int const RCTVideoUnset = -1;
         AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[components URL] options:options];
         [asset.resourceLoader setDelegate:resourceLoaderDelegate queue:dispatch_get_main_queue()];
         */
-
-        handler([AVPlayerItem playerItemWithAsset:asset]);
     }];
 }
 
@@ -526,12 +522,12 @@ static int const RCTVideoUnset = -1;
 - (void)dvAssetLoaderDelegate:(DVAssetLoaderDelegate *)loaderDelegate
                   didLoadData:(NSData *)data
                        forURL:(NSURL *)url {
+    DebugLog(@"dvAssetLoaderDelegate: url '%@'", [url absoluteString]);
     [_videoCache storeItem:data forUri:[url absoluteString] withCallback:^(BOOL success) {
         DebugLog(@"Cache data stored successfully 🎉");
     }];
 }
 
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

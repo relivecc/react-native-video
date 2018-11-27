@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D1107C0A2110259000073188 /* UIView+FindUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C032110259000073188 /* UIView+FindUIViewController.m */; };
-		D1107C0B2110259000073188 /* UIView+FindUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C032110259000073188 /* UIView+FindUIViewController.m */; };
-		D1107C0C2110259000073188 /* RCTVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C052110259000073188 /* RCTVideo.m */; };
-		D1107C0D2110259000073188 /* RCTVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C052110259000073188 /* RCTVideo.m */; };
-		D1107C0E2110259000073188 /* RCTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C062110259000073188 /* RCTVideoManager.m */; };
-		D1107C0F2110259000073188 /* RCTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C062110259000073188 /* RCTVideoManager.m */; };
-		D1107C102110259000073188 /* RCTVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C082110259000073188 /* RCTVideoPlayerViewController.m */; };
-		D1107C112110259000073188 /* RCTVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1107C082110259000073188 /* RCTVideoPlayerViewController.m */; };
+		C7EF13182180C23D00E42B96 /* RCTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */; };
+		C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */; };
+		C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13122180C23D00E42B96 /* RCTVideoCache.m */; };
+		C7EF131B2180C23D00E42B96 /* UIView+FindUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */; };
+		C7EF131C2180C23D00E42B96 /* RCTVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13152180C23D00E42B96 /* RCTVideo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,15 +38,17 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		641E28441F0EEC8500443AF6 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1107C012110259000073188 /* RCTVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTVideoPlayerViewController.h; path = Video/RCTVideoPlayerViewController.h; sourceTree = "<group>"; };
-		D1107C022110259000073188 /* RCTVideoPlayerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTVideoPlayerViewControllerDelegate.h; path = Video/RCTVideoPlayerViewControllerDelegate.h; sourceTree = "<group>"; };
-		D1107C032110259000073188 /* UIView+FindUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FindUIViewController.m"; path = "Video/UIView+FindUIViewController.m"; sourceTree = "<group>"; };
-		D1107C042110259000073188 /* UIView+FindUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FindUIViewController.h"; path = "Video/UIView+FindUIViewController.h"; sourceTree = "<group>"; };
-		D1107C052110259000073188 /* RCTVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTVideo.m; path = Video/RCTVideo.m; sourceTree = "<group>"; };
-		D1107C062110259000073188 /* RCTVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTVideoManager.m; path = Video/RCTVideoManager.m; sourceTree = "<group>"; };
-		D1107C072110259000073188 /* RCTVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTVideo.h; path = Video/RCTVideo.h; sourceTree = "<group>"; };
-		D1107C082110259000073188 /* RCTVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTVideoPlayerViewController.m; path = Video/RCTVideoPlayerViewController.m; sourceTree = "<group>"; };
-		D1107C092110259000073188 /* RCTVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTVideoManager.h; path = Video/RCTVideoManager.h; sourceTree = "<group>"; };
+		C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoManager.m; sourceTree = "<group>"; };
+		C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoPlayerViewController.m; sourceTree = "<group>"; };
+		C7EF130F2180C23D00E42B96 /* RCTVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideo.h; sourceTree = "<group>"; };
+		C7EF13102180C23D00E42B96 /* RCTVideoCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoCache.h; sourceTree = "<group>"; };
+		C7EF13112180C23D00E42B96 /* RCTVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoPlayerViewController.h; sourceTree = "<group>"; };
+		C7EF13122180C23D00E42B96 /* RCTVideoCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoCache.m; sourceTree = "<group>"; };
+		C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FindUIViewController.m"; sourceTree = "<group>"; };
+		C7EF13142180C23D00E42B96 /* UIView+FindUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FindUIViewController.h"; sourceTree = "<group>"; };
+		C7EF13152180C23D00E42B96 /* RCTVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideo.m; sourceTree = "<group>"; };
+		C7EF13162180C23D00E42B96 /* RCTVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoManager.h; sourceTree = "<group>"; };
+		C7EF13172180C23D00E42B96 /* RCTVideoPlayerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoPlayerViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,15 +87,17 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				D1107C072110259000073188 /* RCTVideo.h */,
-				D1107C052110259000073188 /* RCTVideo.m */,
-				D1107C092110259000073188 /* RCTVideoManager.h */,
-				D1107C062110259000073188 /* RCTVideoManager.m */,
-				D1107C012110259000073188 /* RCTVideoPlayerViewController.h */,
-				D1107C082110259000073188 /* RCTVideoPlayerViewController.m */,
-				D1107C022110259000073188 /* RCTVideoPlayerViewControllerDelegate.h */,
-				D1107C042110259000073188 /* UIView+FindUIViewController.h */,
-				D1107C032110259000073188 /* UIView+FindUIViewController.m */,
+				C7EF130F2180C23D00E42B96 /* RCTVideo.h */,
+				C7EF13152180C23D00E42B96 /* RCTVideo.m */,
+				C7EF13102180C23D00E42B96 /* RCTVideoCache.h */,
+				C7EF13122180C23D00E42B96 /* RCTVideoCache.m */,
+				C7EF13162180C23D00E42B96 /* RCTVideoManager.h */,
+				C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */,
+				C7EF13112180C23D00E42B96 /* RCTVideoPlayerViewController.h */,
+				C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */,
+				C7EF13172180C23D00E42B96 /* RCTVideoPlayerViewControllerDelegate.h */,
+				C7EF13142180C23D00E42B96 /* UIView+FindUIViewController.h */,
+				C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				641E28441F0EEC8500443AF6 /* libRCTVideo.a */,
 				49E995712048B4CE00EA7890 /* Frameworks */,
@@ -181,10 +182,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1107C0A2110259000073188 /* UIView+FindUIViewController.m in Sources */,
-				D1107C102110259000073188 /* RCTVideoPlayerViewController.m in Sources */,
-				D1107C0E2110259000073188 /* RCTVideoManager.m in Sources */,
-				D1107C0C2110259000073188 /* RCTVideo.m in Sources */,
+				C7EF13182180C23D00E42B96 /* RCTVideoManager.m in Sources */,
+				C7EF131C2180C23D00E42B96 /* RCTVideo.m in Sources */,
+				C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */,
+				C7EF131B2180C23D00E42B96 /* UIView+FindUIViewController.m in Sources */,
+				C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,10 +194,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1107C0B2110259000073188 /* UIView+FindUIViewController.m in Sources */,
-				D1107C112110259000073188 /* RCTVideoPlayerViewController.m in Sources */,
-				D1107C0F2110259000073188 /* RCTVideoManager.m in Sources */,
-				D1107C0D2110259000073188 /* RCTVideo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +234,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../ios/Pods/SPTPersistentCache/**",
+					"../../../ios/Pods/DVAssetLoaderDelegate/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,6 +272,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../ios/Pods/SPTPersistentCache/**",
+					"../../../ios/Pods/DVAssetLoaderDelegate/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -282,8 +288,9 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../../../ios/Pods/DVAssetLoaderDelegate/**",
+					"$(SRCROOT)/../../../ios/Pods/SPTPersistentCache/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/Vendor/SPTPersistentCache/include/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -297,8 +304,9 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../../../ios/Pods/DVAssetLoaderDelegate/**",
+					"$(SRCROOT)/../../../ios/Pods/SPTPersistentCache/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/Vendor/SPTPersistentCache/include/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
