@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
@@ -49,7 +50,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                 Log.d(getName(), "Exporting...");
                 Log.d(getName(), url);
                 final Uri uri = Uri.parse(url);
-                final DataSpec dataSpec = new DataSpec(uri, 0, 100 * 1024 * 1024, null); // TODO won't work for video's over 100 MB
+                final DataSpec dataSpec = new DataSpec(uri, 0, C.LENGTH_UNSET, null);
                 final SimpleCache downloadCache = ExoPlayerCache.getInstance(getReactApplicationContext());
                 CacheUtil.CachingCounters counters = new CacheUtil.CachingCounters();
                 
@@ -73,6 +74,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     try {
                         while ((bytesRead = inputStream.read(buffer)) != -1) {
                             outStream.write(buffer, 0, bytesRead);
+                            // TODO Add onProgress() callback here
                         }
                     } catch (IOException e) {
                         // TODO this exception should not be thrown
@@ -86,8 +88,12 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         counters
                     );
 
-                    // TODO are we sure the complete video is downloaded?
-                    Log.d(getName(), "Cached " + counters.totalCachedBytes() + " bytes (end)");
+                    Log.d(getName(), "Cached " + counters.totalCachedBytes() + " of " + counters.contentLength + " bytes (end)");
+
+                    // NOTE: At least 80% of the video should be cached. It looks like 100% is never achieved...
+                    if (counters.totalCachedBytes() < counters.contentLength * .8) {
+                        throw new Exception("Export failed - not enough content cached");
+                    }
 
                     Log.d(getName(), "Export succeeded");
                     Log.d(getName(), targetFile.getPath());
