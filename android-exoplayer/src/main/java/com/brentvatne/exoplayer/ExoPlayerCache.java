@@ -88,12 +88,8 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         counters
                     );
 
+                    // TODO: Can we be sure all of the video was exported?
                     Log.d(getName(), "Cached " + counters.totalCachedBytes() + " of " + counters.contentLength + " bytes (end)");
-
-                    // NOTE: At least 80% of the video should be cached. It looks like 100% is never achieved...
-                    if (counters.totalCachedBytes() < counters.contentLength * .8) {
-                        throw new Exception("Export failed - not enough content cached");
-                    }
 
                     Log.d(getName(), "Export succeeded");
                     Log.d(getName(), targetFile.getPath());
