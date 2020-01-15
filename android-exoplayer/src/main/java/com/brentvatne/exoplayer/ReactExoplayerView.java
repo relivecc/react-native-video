@@ -40,6 +40,7 @@ import com.google.android.exoplayer2.mediacodec.MediaCodecUtil;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.metadata.MetadataOutput;
 import com.google.android.exoplayer2.source.BehindLiveWindowException;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;	
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
@@ -198,7 +199,6 @@ class ReactExoplayerView extends FrameLayout implements
         mediaDataSourceFactory = buildDataSourceFactory(true);
         downloadCache = ExoPlayerCache.getInstance(getContext());
 
-        mainHandler = new Handler();
         if (CookieHandler.getDefault() != DEFAULT_COOKIE_MANAGER) {
             CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER);
         }
