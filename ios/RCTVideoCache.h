@@ -23,8 +23,6 @@ typedef NS_ENUM(NSUInteger, RCTVideoCacheStatus) {
 }
 
 @property(nonatomic, strong) SPTPersistentCache * _Nullable videoCache;
-@property(nonatomic, strong) NSString * cachePath;
-@property(nonatomic, strong) NSString * cacheIdentifier;
 @property(nonatomic, strong) NSString * temporaryCachePath;
 
 + (RCTVideoCache *)sharedInstance;
@@ -34,5 +32,6 @@ typedef NS_ENUM(NSUInteger, RCTVideoCacheStatus) {
 - (AVURLAsset *)getItemFromTemporaryStorage:(NSString *)key;
 - (BOOL)saveDataToTemporaryStorage:(NSData *)data key:(NSString *)key;
 - (void) createTemporaryPath;
+- (void) setVideoCache:(SPTPersistentCache *)videoCache;
 
 @end

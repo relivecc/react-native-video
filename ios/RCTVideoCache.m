@@ -3,8 +3,6 @@
 @implementation RCTVideoCache
 
 @synthesize videoCache;
-@synthesize cachePath;
-@synthesize cacheIdentifier;
 @synthesize temporaryCachePath;
 
 + (RCTVideoCache *)sharedInstance {
@@ -18,24 +16,7 @@
 
 - (id)init {
   if (self = [super init]) {
-    self.cacheIdentifier = @"rct.video.cache";
-    self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:self.cacheIdentifier];
-    self.cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
-    SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
-    options.cachePath = self.cachePath;
-    options.cacheIdentifier = self.cacheIdentifier;
-    options.defaultExpirationPeriod = 60 * 60 * 24 * 30;
-    options.garbageCollectionInterval = (NSUInteger)(1.5 * SPTPersistentCacheDefaultGCIntervalSec);
-    options.sizeConstraintBytes = 1024 * 1024 * 100;
-    options.useDirectorySeparation = NO;
-#ifdef DEBUG
-    options.debugOutput = ^(NSString *string) {
-      NSLog(@"Video Cache: %@", string);
-    };
-#endif
-    [self createTemporaryPath];
-    self.videoCache = [[SPTPersistentCache alloc] initWithOptions:options];
-    [self.videoCache scheduleGarbageCollector];
+    self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"cache"];
   }
   return self;
 }
@@ -60,6 +41,8 @@
     handler(NO);
     return;
   }
+
+    
   [self saveDataToTemporaryStorage:data key:key];
   [self.videoCache storeData:data forKey:key locked:NO withCallback:^(SPTPersistentCacheResponse * _Nonnull response) {
     if (response.error) {
