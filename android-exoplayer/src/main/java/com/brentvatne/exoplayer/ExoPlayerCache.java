@@ -1,10 +1,16 @@
 package com.brentvatne.exoplayer;
 
 import android.content.Context;
+import android.media.MediaDataSource;
 import android.net.Uri;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
@@ -26,6 +32,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
@@ -50,41 +57,39 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
             public void run() {
                 Log.d(getName(), "Exporting...");
                 Log.d(getName(), url);
+
                 final Uri uri = Uri.parse(url);
+
+                final SimpleCache downloadCache = VideoCache.getInstance().getSimpleCache();
+                final DataSource dataSource = DataSourceUtil.getDefaultDataSourceFactory(getReactApplicationContext(),
+                    null, null).createDataSource();
+
                 final DataSpec dataSpec = new DataSpec(uri, 0, C.LENGTH_UNSET, null);
-                final SimpleCache downloadCache = ExoPlayerCache.getInstance(getReactApplicationContext());
-                CacheKeyFactory cacheKeyFactory = ds -> CACHE_KEY_PREFIX + "." + CacheUtil.generateKey(ds.uri);;
-                
+                File targetFile = new File(getReactApplicationContext().getCacheDir().toString() + "/export", uri.getLastPathSegment());
+
+                // Create export dir if not exists.
+                targetFile.getParentFile().mkdirs();
+
+
+                // https://github.com/google/ExoPlayer/issues/5569
                 try {
-                    CacheUtil.getCached(
-                        dataSpec, 
-                        downloadCache,
-                        cacheKeyFactory
-                    );
-
-                    DataSourceInputStream inputStream = new DataSourceInputStream(createDataSource(downloadCache), dataSpec);
-
-                    File targetFile = new File(ExoPlayerCache.getCacheDir(getReactApplicationContext()) + "/" + uri.getLastPathSegment());
                     OutputStream outStream = new FileOutputStream(targetFile);
-                    
-                    byte[] buffer = new byte[8 * 1024];
-                    int bytesRead;
+                    dataSource.open(dataSpec);
+
                     try {
-                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                            outStream.write(buffer, 0, bytesRead);
-                            // TODO Add onProgress() callback here
+                        byte[] data = new byte[1024];
+                        int position = 0;
+                        int bytesRead;
+                        while ((bytesRead = dataSource.read(data, position, data.length)) != C.RESULT_END_OF_INPUT) {
+                            outStream.write(data, 0, bytesRead);
+                            position += bytesRead;
                         }
                     } catch (IOException e) {
-                        // TODO this exception should not be thrown
-                        Log.d(getName(), "Read error");
+                        Log.d(getName(), "Write error");
                         e.printStackTrace();
+                    } finally {
+                        dataSource.close();
                     }
-
-                    CacheUtil.getCached(
-                        dataSpec, 
-                        downloadCache,
-                        cacheKeyFactory
-                    );
 
                     Log.d(getName(), "Export succeeded");
                     Log.d(getName(), targetFile.getPath());
@@ -100,18 +105,8 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
         exportThread.start();
     }
 
-    public static SimpleCache getInstance(Context context) {
-        if(instance == null) {
-            instance = new SimpleCache(new File(ExoPlayerCache.getCacheDir(context)), new NoOpCacheEvictor());
-        }
-        return instance;
-    }
 
-    private static String getCacheDir(Context context) {
-        return context.getCacheDir().toString() + "/video";
-    }
-
-    private DataSource createDataSource(Cache cache) {
+    private CacheDataSource createDataSource(Cache cache) {
         return new CacheDataSourceFactory(cache, DataSourceUtil.getDefaultDataSourceFactory(
             getReactApplicationContext(),
             null,
