@@ -28,6 +28,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -73,22 +74,20 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                 // https://github.com/google/ExoPlayer/issues/5569
                 try {
-                    OutputStream outStream = new FileOutputStream(targetFile);
+                    BufferedOutputStream outStream = new BufferedOutputStream(new FileOutputStream(targetFile), 64 * 1024);
                     dataSource.open(dataSpec);
 
                     try {
                         byte[] data = new byte[1024];
-                        int position = 0;
-                        int bytesRead;
-                        while ((bytesRead = dataSource.read(data, position, data.length)) != C.RESULT_END_OF_INPUT) {
-                            outStream.write(data, 0, bytesRead);
-                            position += bytesRead;
+                        while ((dataSource.read(data, 0, data.length)) != C.RESULT_END_OF_INPUT) {
+                            outStream.write(data);
                         }
                     } catch (IOException e) {
                         Log.d(getName(), "Write error");
                         e.printStackTrace();
                     } finally {
                         dataSource.close();
+                        outStream.close();
                     }
 
                     Log.d(getName(), "Export succeeded");
@@ -105,7 +104,6 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
         exportThread.start();
     }
 
-
     private CacheDataSource createDataSource(Cache cache) {
         return new CacheDataSourceFactory(cache, DataSourceUtil.getDefaultDataSourceFactory(
             getReactApplicationContext(),
@@ -113,5 +111,4 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
             null
         )).createDataSource();
     }
-
 }
