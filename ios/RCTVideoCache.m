@@ -17,6 +17,7 @@
 - (id)init {
   if (self = [super init]) {
     self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"cache"];
+    [self createTemporaryPath];
   }
   return self;
 }
