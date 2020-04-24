@@ -1,5 +1,6 @@
 #import "RCTVideoManager.h"
 #import "RCTVideo.h"
+#import "RCTVideoExport.h"
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <AVFoundation/AVFoundation.h>
@@ -81,8 +82,20 @@ RCT_REMAP_METHOD(save,
         }
     }];
 }
+RCT_REMAP_METHOD(export,
+        exportURL:(NSString *)url
+        resolver:(RCTPromiseResolveBlock)resolve
+        rejecter:(RCTPromiseRejectBlock)reject)
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [[RCTVideoExport sharedInstance] export:url resolve:resolve reject:reject];
+    });
+}
 RCT_EXPORT_VIEW_PROPERTY(onPictureInPictureStatusChanged, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onRestoreUserInterfaceForPictureInPictureStop, RCTDirectEventBlock);
+
+
+
 
 - (NSDictionary *)constantsToExport
 {

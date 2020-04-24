@@ -34,6 +34,12 @@ export default class Video extends Component {
     };
   }
 
+  static export = async (url) => {
+    return await NativeModules.VideoManager.export(
+      url,
+    );
+  };
+
   setNativeProps(nativeProps) {
     this._root.setNativeProps(nativeProps);
   }
