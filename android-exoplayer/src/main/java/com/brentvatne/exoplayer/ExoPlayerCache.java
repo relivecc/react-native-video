@@ -39,9 +39,20 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     private static SimpleCache instance = null;
     private static final String CACHE_KEY_PREFIX = "exoPlayerCacheKeyPrefix";
+    private String TMP_EXPORT_PATH;
 
     public ExoPlayerCache(ReactApplicationContext reactContext) {
         super(reactContext);
+
+        TMP_EXPORT_PATH = getReactApplicationContext().getCacheDir().toString() + "/video-tmp";
+        File exportPath = new File(TMP_EXPORT_PATH);
+
+        // Clear the temporary export files on launch to make sure this doesn't grow infinitely.
+        if (exportPath.exists()) {
+            for (File child: exportPath.listFiles()) {
+                child.delete();
+            }
+        }
     }
     
     @Override
@@ -66,7 +77,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     null, null).createDataSource();
 
                 final DataSpec dataSpec = new DataSpec(uri, 0, C.LENGTH_UNSET, null);
-                File targetFile = new File(getReactApplicationContext().getCacheDir().toString() + "/export", uri.getLastPathSegment());
+                File targetFile = new File(TMP_EXPORT_PATH, uri.getLastPathSegment());
 
                 // Create export dir if not exists.
                 targetFile.getParentFile().mkdirs();
