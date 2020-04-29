@@ -5,7 +5,7 @@ import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 public class VideoCache {
 
     private static volatile VideoCache instance;
-    private static SimpleCache cache;
+    private SimpleCache cache;
 
     private VideoCache() {
         if (instance != null) {
@@ -23,6 +23,21 @@ public class VideoCache {
         }
 
         return this.cache;
+    }
+
+    public boolean hasSimpleCache() {
+        return this.cache != null;
+    }
+
+    public void resetSimpleCache() {
+        if (hasSimpleCache()) {
+            this.cache.release();
+            this.cache = null;
+        } else {
+            throw new RuntimeException("Resetting video cache but no cache is set!");
+        }
+
+        return;
     }
 
     public static VideoCache getInstance() {
