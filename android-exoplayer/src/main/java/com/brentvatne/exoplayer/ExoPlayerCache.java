@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DataSourceInputStream;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
@@ -73,12 +74,18 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                 // https://github.com/google/ExoPlayer/issues/5569
                 try {
+                     CacheUtil.getCached(
+                        dataSpec,
+                        downloadCache,
+                        new ExoplayerCacheKeyFactory()
+                    );
+
+                    DataSourceInputStream inputStream = new DataSourceInputStream(createDataSource(downloadCache), dataSpec);
                     BufferedOutputStream outStream = new BufferedOutputStream(new FileOutputStream(targetFile), 64 * 1024);
-                    dataSource.open(dataSpec);
 
                     try {
                         byte[] data = new byte[64 * 1024];
-                        while ((dataSource.read(data, 0, data.length)) != C.RESULT_END_OF_INPUT) {
+                        while ((inputStream.read(data, 0, data.length)) != C.RESULT_END_OF_INPUT) {
                             outStream.write(data);
                         }
                     } catch (IOException e) {
