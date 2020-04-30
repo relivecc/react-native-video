@@ -85,8 +85,9 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                     try {
                         byte[] data = new byte[64 * 1024];
-                        while ((inputStream.read(data, 0, data.length)) != C.RESULT_END_OF_INPUT) {
-                            outStream.write(data);
+                        int bytesRead;
+                        while ((bytesRead = inputStream.read(data)) != C.RESULT_END_OF_INPUT) {
+                            outStream.write(data, 0, bytesRead);
                         }
                     } catch (IOException e) {
                         Log.d(getName(), "Write error");
