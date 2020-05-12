@@ -1,6 +1,6 @@
 //
 //  RCTVideoExport.h
-//  react-native-video
+//  react-native-video-exp
 //
 #import <Foundation/Foundation.h>
 #import <React/RCTComponent.h>

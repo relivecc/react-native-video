@@ -54,6 +54,6 @@
     "FilterType.js",
     "TextTrackType.js",
     "VideoResizeMode.js",
-    "react-native-video.podspec"
+    "react-native-video-exp.podspec"
   ]
 }

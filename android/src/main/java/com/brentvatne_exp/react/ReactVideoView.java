@@ -293,7 +293,7 @@ public class ReactVideoView extends ScalableVideoView implements
                     headers.putAll(toStringMap(mRequestHeaders));
                 }
 
-                /* According to https://github.com/react-native-community/react-native-video/pull/537
+                /* According to https://github.com/react-native-community/react-native-video-exp/pull/537
                  *   there is an issue with this where it can cause a IOException.
                  * TODO: diagnose this exception and fix it
                  */

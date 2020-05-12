@@ -82,7 +82,7 @@ static int const RCTVideoUnset = -1;
   NSString *_filterName;
   BOOL _filterEnabled;
   UIViewController * _presentingViewController;
-#if __has_include(<react-native-video/RCTVideoCache.h>)
+#if __has_include(<react-native-video-exp/RCTVideoCache.h>)
   RCTVideoCache * _videoCache;
 #endif
 #if TARGET_OS_IOS
@@ -118,7 +118,7 @@ static int const RCTVideoUnset = -1;
 #if TARGET_OS_IOS
     _restoreUserInterfaceForPIPStopCompletionHandler = NULL;
 #endif
-#if __has_include(<react-native-video/RCTVideoCache.h>)
+#if __has_include(<react-native-video-exp/RCTVideoCache.h>)
     _videoCache = [RCTVideoCache sharedInstance];
 #endif
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -340,7 +340,7 @@ static int const RCTVideoUnset = -1;
   _playerItemObserversSet = YES;
 }
 
-/* Fixes https://github.com/brentvatne/react-native-video/issues/43
+/* Fixes https://github.com/brentvatne/react-native-video-exp/issues/43
  * Crashes caused when trying to remove the observer when there is no
  * observer set */
 - (void)removePlayerItemObservers
@@ -522,7 +522,7 @@ static int const RCTVideoUnset = -1;
        * to bring in the text track code will crash. I suspect this is because the asset hasn't fully loaded.
        * Until this is fixed, we need to bypass caching when text tracks are specified.
        */
-      DebugLog(@"Caching is not supported for uri '%@' because text tracks are not compatible with the cache. Checkout https://github.com/react-native-community/react-native-video/blob/master/docs/caching.md", uri);
+      DebugLog(@"Caching is not supported for uri '%@' because text tracks are not compatible with the cache. Checkout https://github.com/react-native-community/react-native-video-exp/blob/master/docs/caching.md", uri);
       [self playerItemForSourceUsingCache:uri assetOptions:assetOptions withCallback:handler];
       return;
     }
@@ -545,13 +545,13 @@ static int const RCTVideoUnset = -1;
     [_videoCache getItemForUri:uri withCallback:^(RCTVideoCacheStatus videoCacheStatus, AVAsset * _Nullable cachedAsset) {
         switch (videoCacheStatus) {
             case RCTVideoCacheStatusMissingFileExtension: {
-                DebugLog(@"Could not generate cache key for uri '%@'. It is currently not supported to cache urls that do not include a file extension. The video file will not be cached. Checkout https://github.com/react-native-community/react-native-video/blob/master/docs/caching.md", uri);
+                DebugLog(@"Could not generate cache key for uri '%@'. It is currently not supported to cache urls that do not include a file extension. The video file will not be cached. Checkout https://github.com/react-native-community/react-native-video-exp/blob/master/docs/caching.md", uri);
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
                 [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
                 return;
             }
             case RCTVideoCacheStatusUnsupportedFileExtension: {
-                DebugLog(@"Could not generate cache key for uri '%@'. The file extension of that uri is currently not supported. The video file will not be cached. Checkout https://github.com/react-native-community/react-native-video/blob/master/docs/caching.md", uri);
+                DebugLog(@"Could not generate cache key for uri '%@'. The file extension of that uri is currently not supported. The video file will not be cached. Checkout https://github.com/react-native-community/react-native-video-exp/blob/master/docs/caching.md", uri);
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:options];
                 [self playerItemPrepareText:asset assetOptions:options withCallback:handler];
                 return;
