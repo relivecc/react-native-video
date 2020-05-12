@@ -1,4 +1,4 @@
-package com.brentvatne.receiver;
+package com.brentvatne_exp.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

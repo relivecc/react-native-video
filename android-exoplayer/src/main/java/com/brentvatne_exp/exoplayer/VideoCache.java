@@ -1,4 +1,4 @@
-package com.brentvatne.exoplayer;
+package com.brentvatne_exp.exoplayer;
 
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 
