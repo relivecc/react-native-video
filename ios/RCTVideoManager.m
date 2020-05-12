@@ -5,7 +5,7 @@
 #import <React/RCTUIManager.h>
 #import <AVFoundation/AVFoundation.h>
 
-@implementation RCTVideoManager
+@implementation RCTVideoManagerExp
 
 RCT_EXPORT_MODULE();
 

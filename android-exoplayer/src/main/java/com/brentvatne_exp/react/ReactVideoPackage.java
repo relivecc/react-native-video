@@ -1,9 +1,9 @@
-package com.brentvatne.react;
+package com.brentvatne_exp.react;
 
-import com.brentvatne.exoplayer.DefaultReactExoplayerConfig;
-import com.brentvatne.exoplayer.ReactExoplayerConfig;
-import com.brentvatne.exoplayer.ReactExoplayerViewManager;
-import com.brentvatne.exoplayer.ExoPlayerCache;
+import com.brentvatne_exp.exoplayer.DefaultReactExoplayerConfig;
+import com.brentvatne_exp.exoplayer.ReactExoplayerConfig;
+import com.brentvatne_exp.exoplayer.ReactExoplayerViewManager;
+import com.brentvatne_exp.exoplayer.ExoPlayerCache;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;

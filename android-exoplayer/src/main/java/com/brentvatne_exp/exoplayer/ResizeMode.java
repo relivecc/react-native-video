@@ -1,4 +1,4 @@
-package com.brentvatne.exoplayer;
+package com.brentvatne_exp.exoplayer;
 
 import androidx.annotation.IntDef;
 

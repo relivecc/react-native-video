@@ -1,4 +1,4 @@
-package com.brentvatne.exoplayer;
+package com.brentvatne_exp.exoplayer;
 
 import android.annotation.TargetApi;
 import android.content.Context;

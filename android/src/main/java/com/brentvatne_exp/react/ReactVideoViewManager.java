@@ -1,4 +1,4 @@
-package com.brentvatne.react;
+package com.brentvatne_exp.react;
 
 import com.brentvatne.react.ReactVideoView.Events;
 import com.facebook.react.bridge.Arguments;

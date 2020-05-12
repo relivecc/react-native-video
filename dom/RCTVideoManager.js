@@ -8,7 +8,7 @@ import resizeModes from "./resizeModes";
 import type { VideoSource } from "./types";
 
 class RCTVideoManager extends RCTViewManager {
-  static moduleName = "RCTVideoManager";
+  static moduleName = "RCTVideoManagerExp";
 
   view() {
     return new RCTVideo(this.bridge);
