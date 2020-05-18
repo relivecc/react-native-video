@@ -8,7 +8,7 @@ import {
   ViewPropTypes,
   Image,
   Platform,
-  findNodeHandle
+  findNodeHandle,
 } from "react-native";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import TextTrackType from "./TextTrackType";
@@ -17,27 +17,25 @@ import VideoResizeMode from "./VideoResizeMode.js";
 
 const styles = StyleSheet.create({
   base: {
-    overflow: "hidden"
-  }
+    overflow: "hidden",
+  },
 });
 
-const { ExoPlayerCache } = NativeModules;
+const { ExoPlayerExpCache } = NativeModules;
 
-export { TextTrackType, FilterType, ExoPlayerCache };
+export { TextTrackType, FilterType, ExoPlayerExpCache };
 
 export default class Video extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showPoster: !!props.poster
+      showPoster: !!props.poster,
     };
   }
 
   static export = async (url) => {
-    return await NativeModules.VideoManager.export(
-      url,
-    );
+    return await NativeModules.VideoManager.export(url);
   };
 
   setNativeProps(nativeProps) {
@@ -59,7 +57,7 @@ export default class Video extends Component {
   stringsOnlyObject(obj) {
     const strObj = {};
 
-    Object.keys(obj).forEach(x => {
+    Object.keys(obj).forEach((x) => {
       strObj[x] = this.toTypeString(obj[x]);
     });
 
@@ -73,25 +71,25 @@ export default class Video extends Component {
       this.setNativeProps({
         seek: {
           time,
-          tolerance
-        }
+          tolerance,
+        },
       });
     } else {
       this.setNativeProps({
-        seek: time
+        seek: time,
       });
     }
   };
 
   presentFullscreenPlayer = () => {
     this.setNativeProps({
-      fullscreen: true
+      fullscreen: true,
     });
   };
 
   dismissFullscreenPlayer = () => {
     this.setNativeProps({
-      fullscreen: false
+      fullscreen: false,
     });
   };
 
@@ -102,13 +100,13 @@ export default class Video extends Component {
     );
   };
 
-  restoreUserInterfaceForPictureInPictureStopCompleted = restored => {
+  restoreUserInterfaceForPictureInPictureStopCompleted = (restored) => {
     this.setNativeProps({
-      restoreUserInterfaceForPIPStopCompletionHandler: restored
+      restoreUserInterfaceForPIPStopCompletionHandler: restored,
     });
   };
 
-  _assignRoot = component => {
+  _assignRoot = (component) => {
     this._root = component;
   };
 
@@ -118,13 +116,13 @@ export default class Video extends Component {
     }
   };
 
-  _onLoadStart = event => {
+  _onLoadStart = (event) => {
     if (this.props.onLoadStart) {
       this.props.onLoadStart(event.nativeEvent);
     }
   };
 
-  _onLoad = event => {
+  _onLoad = (event) => {
     // Need to hide poster here for windows as onReadyForDisplay is not implemented
     if (Platform.OS === "windows") {
       this._hidePoster();
@@ -134,67 +132,67 @@ export default class Video extends Component {
     }
   };
 
-  _onError = event => {
+  _onError = (event) => {
     if (this.props.onError) {
       this.props.onError(event.nativeEvent);
     }
   };
 
-  _onProgress = event => {
+  _onProgress = (event) => {
     if (this.props.onProgress) {
       this.props.onProgress(event.nativeEvent);
     }
   };
 
-  _onBandwidthUpdate = event => {
+  _onBandwidthUpdate = (event) => {
     if (this.props.onBandwidthUpdate) {
       this.props.onBandwidthUpdate(event.nativeEvent);
     }
   };
 
-  _onSeek = event => {
+  _onSeek = (event) => {
     if (this.props.onSeek) {
       this.props.onSeek(event.nativeEvent);
     }
   };
 
-  _onEnd = event => {
+  _onEnd = (event) => {
     if (this.props.onEnd) {
       this.props.onEnd(event.nativeEvent);
     }
   };
 
-  _onTimedMetadata = event => {
+  _onTimedMetadata = (event) => {
     if (this.props.onTimedMetadata) {
       this.props.onTimedMetadata(event.nativeEvent);
     }
   };
 
-  _onFullscreenPlayerWillPresent = event => {
+  _onFullscreenPlayerWillPresent = (event) => {
     if (this.props.onFullscreenPlayerWillPresent) {
       this.props.onFullscreenPlayerWillPresent(event.nativeEvent);
     }
   };
 
-  _onFullscreenPlayerDidPresent = event => {
+  _onFullscreenPlayerDidPresent = (event) => {
     if (this.props.onFullscreenPlayerDidPresent) {
       this.props.onFullscreenPlayerDidPresent(event.nativeEvent);
     }
   };
 
-  _onFullscreenPlayerWillDismiss = event => {
+  _onFullscreenPlayerWillDismiss = (event) => {
     if (this.props.onFullscreenPlayerWillDismiss) {
       this.props.onFullscreenPlayerWillDismiss(event.nativeEvent);
     }
   };
 
-  _onFullscreenPlayerDidDismiss = event => {
+  _onFullscreenPlayerDidDismiss = (event) => {
     if (this.props.onFullscreenPlayerDidDismiss) {
       this.props.onFullscreenPlayerDidDismiss(event.nativeEvent);
     }
   };
 
-  _onReadyForDisplay = event => {
+  _onReadyForDisplay = (event) => {
     if (!this.props.audioOnly) {
       this._hidePoster();
     }
@@ -204,25 +202,25 @@ export default class Video extends Component {
     }
   };
 
-  _onPlaybackStalled = event => {
+  _onPlaybackStalled = (event) => {
     if (this.props.onPlaybackStalled) {
       this.props.onPlaybackStalled(event.nativeEvent);
     }
   };
 
-  _onPlaybackResume = event => {
+  _onPlaybackResume = (event) => {
     if (this.props.onPlaybackResume) {
       this.props.onPlaybackResume(event.nativeEvent);
     }
   };
 
-  _onPlaybackRateChange = event => {
+  _onPlaybackRateChange = (event) => {
     if (this.props.onPlaybackRateChange) {
       this.props.onPlaybackRateChange(event.nativeEvent);
     }
   };
 
-  _onExternalPlaybackChange = event => {
+  _onExternalPlaybackChange = (event) => {
     if (this.props.onExternalPlaybackChange) {
       this.props.onExternalPlaybackChange(event.nativeEvent);
     }
@@ -234,31 +232,31 @@ export default class Video extends Component {
     }
   };
 
-  _onPictureInPictureStatusChanged = event => {
+  _onPictureInPictureStatusChanged = (event) => {
     if (this.props.onPictureInPictureStatusChanged) {
       this.props.onPictureInPictureStatusChanged(event.nativeEvent);
     }
   };
 
-  _onRestoreUserInterfaceForPictureInPictureStop = event => {
+  _onRestoreUserInterfaceForPictureInPictureStop = (event) => {
     if (this.props.onRestoreUserInterfaceForPictureInPictureStop) {
       this.props.onRestoreUserInterfaceForPictureInPictureStop();
     }
   };
 
-  _onAudioFocusChanged = event => {
+  _onAudioFocusChanged = (event) => {
     if (this.props.onAudioFocusChanged) {
       this.props.onAudioFocusChanged(event.nativeEvent);
     }
   };
 
-  _onBuffer = event => {
+  _onBuffer = (event) => {
     if (this.props.onBuffer) {
       this.props.onBuffer(event.nativeEvent);
     }
   };
 
-  getViewManagerConfig = viewManagerName => {
+  getViewManagerConfig = (viewManagerName) => {
     if (!NativeModules.UIManager.getViewManagerConfig) {
       return NativeModules.UIManager[viewManagerName];
     }
@@ -314,7 +312,7 @@ export default class Video extends Component {
         patchVer: source.patchVer || 0,
         requestHeaders: source.headers
           ? this.stringsOnlyObject(source.headers)
-          : {}
+          : {},
       },
       onVideoLoadStart: this._onLoadStart,
       onVideoLoad: this._onLoad,
@@ -339,12 +337,12 @@ export default class Video extends Component {
       onAudioBecomingNoisy: this._onAudioBecomingNoisy,
       onPictureInPictureStatusChanged: this._onPictureInPictureStatusChanged,
       onRestoreUserInterfaceForPictureInPictureStop: this
-        ._onRestoreUserInterfaceForPictureInPictureStop
+        ._onRestoreUserInterfaceForPictureInPictureStop,
     });
 
     const posterStyle = {
       ...StyleSheet.absoluteFillObject,
-      resizeMode: this.props.posterResizeMode || "contain"
+      resizeMode: this.props.posterResizeMode || "contain",
     };
 
     return (
@@ -379,7 +377,7 @@ Video.propTypes = {
     FilterType.PROCESS,
     FilterType.TONAL,
     FilterType.TRANSFER,
-    FilterType.SEPIA
+    FilterType.SEPIA,
   ]),
   filterEnabled: PropTypes.bool,
   /* Native only */
@@ -405,10 +403,10 @@ Video.propTypes = {
   /* Wrapper component */
   source: PropTypes.oneOfType([
     PropTypes.shape({
-      uri: PropTypes.string
+      uri: PropTypes.string,
     }),
     // Opaque type returned by require('./video.mp4')
-    PropTypes.number
+    PropTypes.number,
   ]),
   minLoadRetryCount: PropTypes.number,
   maxBitRate: PropTypes.number,
@@ -420,15 +418,15 @@ Video.propTypes = {
   allowsExternalPlayback: PropTypes.bool,
   selectedAudioTrack: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
   selectedVideoTrack: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
   selectedTextTrack: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
   textTracks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -437,9 +435,9 @@ Video.propTypes = {
       type: PropTypes.oneOf([
         TextTrackType.SRT,
         TextTrackType.TTML,
-        TextTrackType.VTT
+        TextTrackType.VTT,
       ]),
-      language: PropTypes.string.isRequired
+      language: PropTypes.string.isRequired,
     })
   ),
   paused: PropTypes.bool,
@@ -449,7 +447,7 @@ Video.propTypes = {
     minBufferMs: PropTypes.number,
     maxBufferMs: PropTypes.number,
     bufferForPlaybackMs: PropTypes.number,
-    bufferForPlaybackAfterRebufferMs: PropTypes.number
+    bufferForPlaybackAfterRebufferMs: PropTypes.number,
   }),
   stereoPan: PropTypes.number,
   rate: PropTypes.number,
@@ -495,13 +493,13 @@ Video.propTypes = {
   translateX: PropTypes.number,
   translateY: PropTypes.number,
   rotation: PropTypes.number,
-  ...ViewPropTypes
+  ...ViewPropTypes,
 };
 
 const RCTVideo = requireNativeComponent("RCTVideo", Video, {
   nativeOnly: {
     src: true,
     seek: true,
-    fullscreen: true
-  }
+    fullscreen: true,
+  },
 });

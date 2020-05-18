@@ -48,7 +48,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     
     @Override
     public String getName() {
-        return "ExoPlayerCache";
+        return "ExoPlayerExpCache";
     }
 
     @ReactMethod
