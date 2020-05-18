@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ReactVideoPackage implements ReactPackage {
+public class ReactVideoExpPackage implements ReactPackage {
 
     private ReactExoplayerConfig config;
 
-    public ReactVideoPackage() {
+    public ReactVideoExpPackage() {
     }
 
-    public ReactVideoPackage(ReactExoplayerConfig config) {
+    public ReactVideoExpPackage(ReactExoplayerConfig config) {
         this.config = config;
     }
 

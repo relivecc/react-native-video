@@ -171,17 +171,17 @@ android.enableJetifier=true
 On top, where imports are:
 
 ```java
-import com.brentvatne_exp.react.ReactVideoPackage;
+import com.brentvatne_exp.react.ReactVideoExpPackage;
 ```
 
-Add the `ReactVideoPackage` class to your list of exported packages.
+Add the `ReactVideoExpPackage` class to your list of exported packages.
 
 ```java
 @Override
 protected List<ReactPackage> getPackages() {
     return Arrays.asList(
             new MainReactPackage(),
-            new ReactVideoPackage()
+            new ReactVideoExpPackage()
     );
 }
 ```
@@ -216,7 +216,7 @@ Add a reference to `ReactNativeVideo` to your main application project. From Vis
 
 #### **MainPage.cs**
 
-Add the `ReactVideoPackage` class to your list of exported packages.
+Add the `ReactVideoExpPackage` class to your list of exported packages.
 
 ```cs
 using ReactNative;
@@ -233,7 +233,7 @@ using System.Collections.Generic;
                 return new List<IReactPackage>
                 {
                     new MainReactPackage(),
-                    new ReactVideoPackage(), // <-- Add this
+                    new ReactVideoExpPackage(), // <-- Add this
                 };
             }
         }
@@ -1092,8 +1092,8 @@ Payload:
 | Property  | Description |
 | --------- | ----------- |
 | isNetwork | boolean     | Boolean indicating if the media is being loaded from the network |
-| type      | string      | Type of the media. Not available on Windows |
-| uri       | string      | URI for the media source. Not available on Windows |
+| type      | string      | Type of the media. Not available on Windows                      |
+| uri       | string      | URI for the media source. Not available on Windows               |
 
 Example:
 

@@ -3,7 +3,7 @@ package com.videoplayer;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.brentvatne_exp.react.ReactVideoPackage;
+import com.brentvatne_exp.react.ReactVideoExpPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -24,7 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
-        new ReactVideoPackage()
+        new ReactVideoExpPackage()
       );
     }
   };
