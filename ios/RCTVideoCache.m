@@ -1,12 +1,12 @@
 #import "RCTVideoCache.h"
 
-@implementation RCTVideoCache
+@implementation RCTVideoCacheE
 
 @synthesize videoCache;
 @synthesize temporaryCachePath;
 
-+ (RCTVideoCache *)sharedInstance {
-  static RCTVideoCache *sharedInstance = nil;
++ (RCTVideoCacheE *)sharedInstance {
+  static RCTVideoCacheE *sharedInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     sharedInstance = [[self alloc] init];

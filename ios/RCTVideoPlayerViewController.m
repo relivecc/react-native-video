@@ -1,10 +1,10 @@
 #import "RCTVideoPlayerViewController.h"
 
-@interface RCTVideoPlayerViewController ()
+@interface RCTVideoPlayerViewControllerE ()
 
 @end
 
-@implementation RCTVideoPlayerViewController
+@implementation RCTVideoPlayerViewControllerE
 
 - (BOOL)shouldAutorotate {
 

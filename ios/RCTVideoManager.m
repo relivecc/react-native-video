@@ -5,13 +5,13 @@
 #import <React/RCTUIManager.h>
 #import <AVFoundation/AVFoundation.h>
 
-@implementation RCTVideoManager
+@implementation RCTVideoManagerE
 
 RCT_EXPORT_MODULE();
 
 - (UIView *)view
 {
-  return [[RCTVideo alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
+  return [[RCTVideoE alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
 }
 
 - (dispatch_queue_t)methodQueue
@@ -73,9 +73,9 @@ RCT_REMAP_METHOD(save,
         resolver:(RCTPromiseResolveBlock)resolve
         rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [self.bridge.uiManager prependUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTVideo *> *viewRegistry) {
-        RCTVideo *view = viewRegistry[reactTag];
-        if (![view isKindOfClass:[RCTVideo class]]) {
+    [self.bridge.uiManager prependUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTVideoE *> *viewRegistry) {
+        RCTVideoE *view = viewRegistry[reactTag];
+        if (![view isKindOfClass:[RCTVideoE class]]) {
             RCTLogError(@"Invalid view returned from registry, expecting RCTVideo, got: %@", view);
         } else {
             [view save:options resolve:resolve reject:reject];
@@ -88,7 +88,7 @@ RCT_REMAP_METHOD(export,
         rejecter:(RCTPromiseRejectBlock)reject)
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [[RCTVideoExport sharedInstance] export:url resolve:resolve reject:reject];
+        [[RCTVideoExportE sharedInstance] export:url resolve:resolve reject:reject];
     });
 }
 RCT_EXPORT_VIEW_PROPERTY(onPictureInPictureStatusChanged, RCTDirectEventBlock);

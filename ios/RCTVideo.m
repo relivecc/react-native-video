@@ -23,7 +23,7 @@ static int const RCTVideoUnset = -1;
     #define DebugLog(...) (void)0
 #endif
 
-@implementation RCTVideo
+@implementation RCTVideoE
 {
   AVPlayer *_player;
   AVPlayerItem *_playerItem;
@@ -32,7 +32,7 @@ static int const RCTVideoUnset = -1;
   BOOL _playerBufferEmpty;
   AVPlayerLayer *_playerLayer;
   BOOL _playerLayerObserverSet;
-  RCTVideoPlayerViewController *_playerViewController;
+  RCTVideoPlayerViewControllerE *_playerViewController;
   NSURL *_videoURL;
   
   /* Required to publish events */
@@ -83,7 +83,7 @@ static int const RCTVideoUnset = -1;
   BOOL _filterEnabled;
   UIViewController * _presentingViewController;
 #if __has_include(<react-native-video-exp/RCTVideoCache.h>)
-  RCTVideoCache * _videoCache;
+  RCTVideoCacheE * _videoCache;
 #endif
 #if TARGET_OS_IOS
   void (^__strong _Nonnull _restoreUserInterfaceForPIPStopCompletionHandler)(BOOL);
@@ -119,7 +119,7 @@ static int const RCTVideoUnset = -1;
     _restoreUserInterfaceForPIPStopCompletionHandler = NULL;
 #endif
 #if __has_include(<react-native-video-exp/RCTVideoCache.h>)
-    _videoCache = [RCTVideoCache sharedInstance];
+    _videoCache = [RCTVideoCacheE sharedInstance];
 #endif
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive:)
@@ -145,9 +145,9 @@ static int const RCTVideoUnset = -1;
   return self;
 }
 
-- (RCTVideoPlayerViewController*)createPlayerViewController:(AVPlayer*)player
+- (RCTVideoPlayerViewControllerE*)createPlayerViewController:(AVPlayer*)player
                                              withPlayerItem:(AVPlayerItem*)playerItem {
-    RCTVideoPlayerViewController* viewController = [[RCTVideoPlayerViewController alloc] init];
+    RCTVideoPlayerViewControllerE* viewController = [[RCTVideoPlayerViewControllerE alloc] init];
     viewController.showsPlaybackControls = YES;
     viewController.rctDelegate = self;
     viewController.preferredOrientation = _fullscreenOrientation;
@@ -188,7 +188,7 @@ static int const RCTVideoUnset = -1;
   const Float64 progressUpdateIntervalMS = _progressUpdateInterval / 1000;
   // @see endScrubbing in AVPlayerDemoPlaybackViewController.m
   // of https://developer.apple.com/library/ios/samplecode/AVPlayerDemo/Introduction/Intro.html
-  __weak RCTVideo *weakSelf = self;
+  __weak RCTVideoE *weakSelf = self;
   _timeObserver = [_player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(progressUpdateIntervalMS, NSEC_PER_SEC)
                                                         queue:NULL
                                                    usingBlock:^(CMTime time) { [weakSelf sendProgressUpdate]; }

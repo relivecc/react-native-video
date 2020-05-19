@@ -6,10 +6,10 @@
 #import <Foundation/Foundation.h>
 #include <AVFoundation/AVFoundation.h>
 
-@implementation RCTVideoExport
+@implementation RCTVideoExportE
 
-+ (RCTVideoCache *)sharedInstance {
-    static RCTVideoCache *sharedInstance = nil;
++ (RCTVideoCacheE *)sharedInstance {
+    static RCTVideoCacheE *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
@@ -20,7 +20,7 @@
 
 - (void)export:(NSString *)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
     // Thread to prevent stuttering.
-    RCTVideoCache *videoCache = [RCTVideoCache sharedInstance];
+    RCTVideoCacheE *videoCache = [RCTVideoCacheE sharedInstance];
     
     [videoCache getItemForUri:uri withCallback:^(RCTVideoCacheStatus videoCacheStatus, AVAsset * _Nullable cachedAsset) {
         NSURL *url = [NSURL URLWithString:uri];
@@ -82,7 +82,7 @@
 
 - (void)assetExport:(AVAsset *)asset resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
       AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:asset presetName:AVAssetExportPresetPassthrough];
-      NSString *cachePath = [[RCTVideoCache sharedInstance] temporaryCachePath];
+      NSString *cachePath = [[RCTVideoCacheE sharedInstance] temporaryCachePath];
       
       if (exportSession == nil) {
           return reject(@"ERROR_COULD_NOT_CREATE_EXPORT_SESSION", @"Could not create export session", nil);

@@ -8,9 +8,9 @@
 #import "RCTVideoCache.h"
 #import "DVURLAsset.h"
 
-@interface RCTVideoExport : NSObject <AVAssetDownloadDelegate>
+@interface RCTVideoExportE : NSObject <AVAssetDownloadDelegate>
 
-+ (RCTVideoExport *)sharedInstance;
++ (RCTVideoExportE *)sharedInstance;
 - (void)export:(NSString *)uri resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 
 @end
