@@ -1,6 +1,6 @@
-#import "RCTVideoManager.h"
-#import "RCTVideo.h"
-#import "RCTVideoExport.h"
+#import "RCTVideoManagerE.h"
+#import "RCTVideoE.h"
+#import "RCTVideoEExport.h"
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <AVFoundation/AVFoundation.h>

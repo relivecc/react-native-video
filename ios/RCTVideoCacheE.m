@@ -1,4 +1,4 @@
-#import "RCTVideoCache.h"
+#import "RCTVideoCacheE.h"
 
 @implementation RCTVideoCacheE
 

@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C7522D2C2452D73B00027383 /* RCTVideoExport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7522D2A2452D73B00027383 /* RCTVideoExport.m */; };
-		C7EF13182180C23D00E42B96 /* RCTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */; };
-		C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */; };
-		C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13122180C23D00E42B96 /* RCTVideoCache.m */; };
+		C7522D2C2452D73B00027383 /* RCTVideoEExport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7522D2A2452D73B00027383 /* RCTVideoEExport.m */; };
+		C7EF13182180C23D00E42B96 /* RCTVideoManagerE.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130D2180C23D00E42B96 /* RCTVideoManagerE.m */; };
+		C7EF13192180C23D00E42B96 /* RCTVideoEPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130E2180C23D00E42B96 /* RCTVideoEPlayerViewController.m */; };
+		C7EF131A2180C23D00E42B96 /* RCTVideoCacheE.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13122180C23D00E42B96 /* RCTVideoCacheE.m */; };
 		C7EF131B2180C23D00E42B96 /* UIView+FindUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */; };
-		C7EF131C2180C23D00E42B96 /* RCTVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13152180C23D00E42B96 /* RCTVideo.m */; };
+		C7EF131C2180C23D00E42B96 /* RCTVideoE.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13152180C23D00E42B96 /* RCTVideoE.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,19 +39,19 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		641E28441F0EEC8500443AF6 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7522D2A2452D73B00027383 /* RCTVideoExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoExport.m; sourceTree = "<group>"; };
-		C7522D2B2452D73B00027383 /* RCTVideoExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoExport.h; sourceTree = "<group>"; };
-		C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoManager.m; sourceTree = "<group>"; };
-		C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoPlayerViewController.m; sourceTree = "<group>"; };
-		C7EF130F2180C23D00E42B96 /* RCTVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideo.h; sourceTree = "<group>"; };
-		C7EF13102180C23D00E42B96 /* RCTVideoCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoCache.h; sourceTree = "<group>"; };
-		C7EF13112180C23D00E42B96 /* RCTVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoPlayerViewController.h; sourceTree = "<group>"; };
-		C7EF13122180C23D00E42B96 /* RCTVideoCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoCache.m; sourceTree = "<group>"; };
+		C7522D2A2452D73B00027383 /* RCTVideoEExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoEExport.m; sourceTree = "<group>"; };
+		C7522D2B2452D73B00027383 /* RCTVideoEExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoEExport.h; sourceTree = "<group>"; };
+		C7EF130D2180C23D00E42B96 /* RCTVideoManagerE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoManagerE.m; sourceTree = "<group>"; };
+		C7EF130E2180C23D00E42B96 /* RCTVideoEPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoEPlayerViewController.m; sourceTree = "<group>"; };
+		C7EF130F2180C23D00E42B96 /* RCTVideoE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoE.h; sourceTree = "<group>"; };
+		C7EF13102180C23D00E42B96 /* RCTVideoCacheE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoCacheE.h; sourceTree = "<group>"; };
+		C7EF13112180C23D00E42B96 /* RCTVideoEPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoEPlayerViewController.h; sourceTree = "<group>"; };
+		C7EF13122180C23D00E42B96 /* RCTVideoCacheE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoCacheE.m; sourceTree = "<group>"; };
 		C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FindUIViewController.m"; sourceTree = "<group>"; };
 		C7EF13142180C23D00E42B96 /* UIView+FindUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FindUIViewController.h"; sourceTree = "<group>"; };
-		C7EF13152180C23D00E42B96 /* RCTVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideo.m; sourceTree = "<group>"; };
-		C7EF13162180C23D00E42B96 /* RCTVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoManager.h; sourceTree = "<group>"; };
-		C7EF13172180C23D00E42B96 /* RCTVideoPlayerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoPlayerViewControllerDelegate.h; sourceTree = "<group>"; };
+		C7EF13152180C23D00E42B96 /* RCTVideoE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoE.m; sourceTree = "<group>"; };
+		C7EF13162180C23D00E42B96 /* RCTVideoManagerE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoManagerE.h; sourceTree = "<group>"; };
+		C7EF13172180C23D00E42B96 /* RCTVideoEPlayerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoEPlayerViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,17 +90,17 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				C7522D2B2452D73B00027383 /* RCTVideoExport.h */,
-				C7522D2A2452D73B00027383 /* RCTVideoExport.m */,
-				C7EF130F2180C23D00E42B96 /* RCTVideo.h */,
-				C7EF13152180C23D00E42B96 /* RCTVideo.m */,
-				C7EF13102180C23D00E42B96 /* RCTVideoCache.h */,
-				C7EF13122180C23D00E42B96 /* RCTVideoCache.m */,
-				C7EF13162180C23D00E42B96 /* RCTVideoManager.h */,
-				C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */,
-				C7EF13112180C23D00E42B96 /* RCTVideoPlayerViewController.h */,
-				C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */,
-				C7EF13172180C23D00E42B96 /* RCTVideoPlayerViewControllerDelegate.h */,
+				C7522D2B2452D73B00027383 /* RCTVideoEExport.h */,
+				C7522D2A2452D73B00027383 /* RCTVideoEExport.m */,
+				C7EF130F2180C23D00E42B96 /* RCTVideoE.h */,
+				C7EF13152180C23D00E42B96 /* RCTVideoE.m */,
+				C7EF13102180C23D00E42B96 /* RCTVideoCacheE.h */,
+				C7EF13122180C23D00E42B96 /* RCTVideoCacheE.m */,
+				C7EF13162180C23D00E42B96 /* RCTVideoManagerE.h */,
+				C7EF130D2180C23D00E42B96 /* RCTVideoManagerE.m */,
+				C7EF13112180C23D00E42B96 /* RCTVideoEPlayerViewController.h */,
+				C7EF130E2180C23D00E42B96 /* RCTVideoEPlayerViewController.m */,
+				C7EF13172180C23D00E42B96 /* RCTVideoEPlayerViewControllerDelegate.h */,
 				C7EF13142180C23D00E42B96 /* UIView+FindUIViewController.h */,
 				C7EF13132180C23D00E42B96 /* UIView+FindUIViewController.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -188,12 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7EF13182180C23D00E42B96 /* RCTVideoManager.m in Sources */,
-				C7EF131C2180C23D00E42B96 /* RCTVideo.m in Sources */,
-				C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */,
+				C7EF13182180C23D00E42B96 /* RCTVideoManagerE.m in Sources */,
+				C7EF131C2180C23D00E42B96 /* RCTVideoE.m in Sources */,
+				C7EF13192180C23D00E42B96 /* RCTVideoEPlayerViewController.m in Sources */,
 				C7EF131B2180C23D00E42B96 /* UIView+FindUIViewController.m in Sources */,
-				C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */,
-				C7522D2C2452D73B00027383 /* RCTVideoExport.m in Sources */,
+				C7EF131A2180C23D00E42B96 /* RCTVideoCacheE.m in Sources */,
+				C7522D2C2452D73B00027383 /* RCTVideoEExport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

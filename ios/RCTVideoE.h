@@ -1,12 +1,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "AVKit/AVKit.h"
 #import "UIView+FindUIViewController.h"
-#import "RCTVideoPlayerViewController.h"
-#import "RCTVideoPlayerViewControllerDelegate.h"
+#import "RCTVideoEPlayerViewController.h"
+#import "RCTVideoEPlayerViewControllerDelegate.h"
 #import <React/RCTComponent.h>
 #import <React/RCTBridgeModule.h>
 
-#import "RCTVideoCache.h"
+#import "RCTVideoCacheE.h"
 #import "DVURLAsset.h"
 #import "DVAssetLoaderDelegate.h"
 

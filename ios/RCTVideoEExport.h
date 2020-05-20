@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTComponent.h>
 #import <React/RCTBridgeModule.h>
-#import "RCTVideoCache.h"
+#import "RCTVideoCacheE.h"
 #import "DVURLAsset.h"
 
 @interface RCTVideoExportE : NSObject <AVAssetDownloadDelegate>
