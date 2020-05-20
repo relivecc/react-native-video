@@ -82,7 +82,7 @@ static int const RCTVideoUnset = -1;
   NSString *_filterName;
   BOOL _filterEnabled;
   UIViewController * _presentingViewController;
-#if __has_include(<react-native-video-exp/RCTVideoCache.h>)
+#if __has_include(<react-native-video-exp/RCTVideoCacheE.h>)
   RCTVideoCacheE * _videoCache;
 #endif
 #if TARGET_OS_IOS
@@ -118,7 +118,7 @@ static int const RCTVideoUnset = -1;
 #if TARGET_OS_IOS
     _restoreUserInterfaceForPIPStopCompletionHandler = NULL;
 #endif
-#if __has_include(<react-native-video-exp/RCTVideoCache.h>)
+#if __has_include(<react-native-video-exp/RCTVideoCacheE.h>)
     _videoCache = [RCTVideoCacheE sharedInstance];
 #endif
     [[NSNotificationCenter defaultCenter] addObserver:self

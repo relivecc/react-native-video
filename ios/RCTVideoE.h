@@ -11,7 +11,7 @@
 #import "DVAssetLoaderDelegate.h"
 
 @class RCTEventDispatcher;
-#if __has_include(<react-native-video-exp/RCTVideoCache.h>)
+#if __has_include(<react-native-video-exp/RCTVideoCacheE.h>)
 @interface RCTVideoE : UIView <RCTVideoPlayerViewControllerDelegate, DVAssetLoaderDelegatesDelegate>
 #elif TARGET_OS_TV
 @interface RCTVideoE : UIView <RCTVideoPlayerViewControllerDelegate>
