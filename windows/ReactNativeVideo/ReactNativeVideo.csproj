@@ -88,7 +88,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReactVideoPackage.cs" />
+    <Compile Include="ReactVideoExpPackage.cs" />
     <Compile Include="ReactVideoView.cs" />
     <Compile Include="ReactVideoViewManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

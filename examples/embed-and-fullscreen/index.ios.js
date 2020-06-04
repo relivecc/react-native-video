@@ -1,7 +1,5 @@
-'use strict';
-import React, {
-  Component
-} from 'react';
+"use strict";
+import React, { Component } from "react";
 
 import {
   AppRegistry,
@@ -9,12 +7,12 @@ import {
   View,
   Dimensions,
   Text,
-  Button
-} from 'react-native';
+  Button,
+} from "react-native";
 
-import Util from './Utils'
+import Util from "./Utils";
 
-import Video from 'react-native-video';
+import Video from "react-native-video-exp";
 
 export default class VideoPlayer extends Component {
   constructor(props) {
@@ -27,28 +25,32 @@ export default class VideoPlayer extends Component {
   }
 
   render() {
-    return <View 
-      onLayout={this.onLayout}
-      style={styles.container}>
-      <Text>Here's some pre-Text</Text>
-      <Video
-        ref={p => { this.videoPlayer = p; }}
-        source={require('./broadchurch.mp4')}
-        style={{width: this.state.orientationWidth, height: this.state.orientationHeight }}
-        controls={true}
-      />
-      <Button title="full screen" onPress={ this.onPress.bind(this) }></Button>
-    </View>
+    return (
+      <View onLayout={this.onLayout} style={styles.container}>
+        <Text>Here's some pre-Text</Text>
+        <Video
+          ref={(p) => {
+            this.videoPlayer = p;
+          }}
+          source={require("./broadchurch.mp4")}
+          style={{
+            width: this.state.orientationWidth,
+            height: this.state.orientationHeight,
+          }}
+          controls={true}
+        />
+        <Button title="full screen" onPress={this.onPress.bind(this)}></Button>
+      </View>
+    );
   }
 
   onPress() {
-    if (this.videoPlayer!=null)
-      this.videoPlayer.presentFullscreenPlayer();
+    if (this.videoPlayer != null) this.videoPlayer.presentFullscreenPlayer();
   }
 
   resizeVideoPlayer() {
     // Always in 16 /9 aspect ratio
-    let {width, height} = Dimensions.get('window');
+    let { width, height } = Dimensions.get("window");
 
     if (Util.isPortrait()) {
       this.setState({
@@ -58,13 +60,13 @@ export default class VideoPlayer extends Component {
     } else {
       this.setState({
         orientationHeight: height * 0.8,
-        orientationWidth: height * 0.8 * 1.77
+        orientationWidth: height * 0.8 * 1.77,
       });
     }
   }
 
   onLayout(e) {
-    console.log('on layout called');
+    console.log("on layout called");
     this.resizeVideoPlayer();
   }
 }
@@ -72,10 +74,10 @@ export default class VideoPlayer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
   },
 });
 
-AppRegistry.registerComponent('VideoPlayer', () => VideoPlayer);
+AppRegistry.registerComponent("VideoPlayer", () => VideoPlayer);

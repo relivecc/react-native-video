@@ -34,7 +34,7 @@ namespace VideoPlayer
                 return new List<IReactPackage>
                 {
                     new MainReactPackage(),
-                    new ReactVideoPackage(),
+                    new ReactVideoExpPackage(),
                 };
             }
         }

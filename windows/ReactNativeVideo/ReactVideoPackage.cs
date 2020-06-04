@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ReactNativeVideo
 {
-    public class ReactVideoPackage : IReactPackage
+    public class ReactVideoExpPackage : IReactPackage
     {
         public IReadOnlyList<Type> CreateJavaScriptModulesConfig()
         {
