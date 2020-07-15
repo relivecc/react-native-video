@@ -121,6 +121,7 @@ class ReactExoplayerView extends FrameLayout implements
     private int minLoadRetryCount = 3;
     private int maxBitRate = 0;
     private long seekTime = C.TIME_UNSET;
+    private int codecRetries = 0;
 
     private int minBufferMs = DefaultLoadControl.DEFAULT_MIN_BUFFER_MS;
     private int maxBufferMs = DefaultLoadControl.DEFAULT_MAX_BUFFER_MS;
@@ -849,6 +850,28 @@ class ReactExoplayerView extends FrameLayout implements
             ex = e.getSourceException();
             errorString = getResources().getString(R.string.unrecognized_media_format);
         }
+
+        // Assumption: If we have a codec error it could be that it is still busy because another component has not yet unmounted.
+        // We retry this max 3 times with some delay and see if the error decreases.
+        int MAX_CODEC_RETRIES = 3;
+        if (e.type == ExoPlaybackException.TYPE_RENDERER) {
+            if (this.codecRetries < MAX_CODEC_RETRIES) {
+                this.codecRetries += 1;
+
+                // Release the current player.
+                releasePlayer();
+
+                // Retry init after some delay.
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initializePlayer();
+                    }
+                }, 500);
+                return;
+            }
+        }
+
         if (errorString != null) {
             eventEmitter.error(errorString, ex);
         }
