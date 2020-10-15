@@ -591,6 +591,7 @@ static int const RCTVideoUnset = -1;
                   didLoadData:(NSData *)data
                        forURL:(NSURL *)url {
     DebugLog(@"dvAssetLoaderDelegate: url '%@'", [url absoluteString]);
+    
     [_videoCache storeItem:data forUri:[url absoluteString] withCallback:^(BOOL success) {
         DebugLog(@"Cache data stored successfully 🎉");
     }];

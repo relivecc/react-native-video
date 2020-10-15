@@ -43,7 +43,6 @@ import com.google.android.exoplayer2.source.BehindLiveWindowException;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;	
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
 import com.google.android.exoplayer2.source.TrackGroup;
 import com.google.android.exoplayer2.source.TrackGroupArray;
@@ -62,7 +61,9 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultAllocator;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.cache.Cache;
+import com.google.android.exoplayer2.upstream.FileDataSourceFactory;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSink;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSinkFactory;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.Util;
@@ -103,6 +104,8 @@ class ReactExoplayerView extends FrameLayout implements
     private ExoPlayerView exoPlayerView;
 
     private SimpleCache downloadCache;
+    private ExoplayerCacheKeyFactory cacheKeyFactory;
+    private CacheDataSourceFactory cacheDataSourceFactory;
     private DataSource.Factory mediaDataSourceFactory;
     private SimpleExoPlayer player;
     private DefaultTrackSelector trackSelector;
@@ -198,7 +201,13 @@ class ReactExoplayerView extends FrameLayout implements
     private void createViews() {
         clearResumePosition();
         mediaDataSourceFactory = buildDataSourceFactory(true);
-        downloadCache = ExoPlayerCache.getInstance(getContext());
+        downloadCache = VideoCache.getInstance().getSimpleCache();
+        cacheKeyFactory = new ExoplayerCacheKeyFactory();
+        cacheDataSourceFactory = new CacheDataSourceFactory(
+            downloadCache, mediaDataSourceFactory, new FileDataSourceFactory(),
+            new CacheDataSinkFactory(downloadCache, CacheDataSink.DEFAULT_FRAGMENT_SIZE),
+            0, null, cacheKeyFactory);
+
 
         if (CookieHandler.getDefault() != DEFAULT_COOKIE_MANAGER) {
             CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER);
@@ -435,7 +444,7 @@ class ReactExoplayerView extends FrameLayout implements
                         config.buildLoadErrorHandlingPolicy(minLoadRetryCount)
                 ).createMediaSource(uri);
             case C.TYPE_OTHER:
-                return new ExtractorMediaSource.Factory(new CacheDataSourceFactory(downloadCache, mediaDataSourceFactory))
+                return new ExtractorMediaSource.Factory(cacheDataSourceFactory)
                         .createMediaSource(uri);
             default: {
                 throw new IllegalStateException("Unsupported type: " + type);

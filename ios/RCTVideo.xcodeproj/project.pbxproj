@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7522D2C2452D73B00027383 /* RCTVideoExport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7522D2A2452D73B00027383 /* RCTVideoExport.m */; };
 		C7EF13182180C23D00E42B96 /* RCTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */; };
 		C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */; };
 		C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF13122180C23D00E42B96 /* RCTVideoCache.m */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		641E28441F0EEC8500443AF6 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTVideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7522D2A2452D73B00027383 /* RCTVideoExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoExport.m; sourceTree = "<group>"; };
+		C7522D2B2452D73B00027383 /* RCTVideoExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideoExport.h; sourceTree = "<group>"; };
 		C7EF130D2180C23D00E42B96 /* RCTVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoManager.m; sourceTree = "<group>"; };
 		C7EF130E2180C23D00E42B96 /* RCTVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTVideoPlayerViewController.m; sourceTree = "<group>"; };
 		C7EF130F2180C23D00E42B96 /* RCTVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTVideo.h; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				C7522D2B2452D73B00027383 /* RCTVideoExport.h */,
+				C7522D2A2452D73B00027383 /* RCTVideoExport.m */,
 				C7EF130F2180C23D00E42B96 /* RCTVideo.h */,
 				C7EF13152180C23D00E42B96 /* RCTVideo.m */,
 				C7EF13102180C23D00E42B96 /* RCTVideoCache.h */,
@@ -164,6 +169,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -187,6 +193,7 @@
 				C7EF13192180C23D00E42B96 /* RCTVideoPlayerViewController.m in Sources */,
 				C7EF131B2180C23D00E42B96 /* UIView+FindUIViewController.m in Sources */,
 				C7EF131A2180C23D00E42B96 /* RCTVideoCache.m in Sources */,
+				C7522D2C2452D73B00027383 /* RCTVideoExport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
