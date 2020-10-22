@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
@@ -42,7 +43,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void exportVideo(final String url, final Promise promise) {
+    public void exportVideo(final String url, boolean improvedErrorHandling, final Promise promise) {
         Log.d(getName(), "exportVideo");
 
         Thread exportThread = new Thread(new Runnable() {
@@ -54,10 +55,10 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                 final DataSpec dataSpec = new DataSpec(uri, 0, C.LENGTH_UNSET, null);
                 final SimpleCache downloadCache = ExoPlayerCache.getInstance(getReactApplicationContext());
                 CacheKeyFactory cacheKeyFactory = ds -> CACHE_KEY_PREFIX + "." + CacheUtil.generateKey(ds.uri);;
-                
+
                 try {
                     CacheUtil.getCached(
-                        dataSpec, 
+                        dataSpec,
                         downloadCache,
                         cacheKeyFactory
                     );
@@ -66,7 +67,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                     File targetFile = new File(ExoPlayerCache.getCacheDir(getReactApplicationContext()) + "/" + uri.getLastPathSegment());
                     OutputStream outStream = new FileOutputStream(targetFile);
-                    
+
                     byte[] buffer = new byte[8 * 1024];
                     int bytesRead;
                     try {
@@ -78,10 +79,14 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         // TODO this exception should not be thrown
                         Log.d(getName(), "Read error");
                         e.printStackTrace();
+
+                        if (improvedErrorHandling) {
+                            throw e;
+                        }
                     }
 
                     CacheUtil.getCached(
-                        dataSpec, 
+                        dataSpec,
                         downloadCache,
                         cacheKeyFactory
                     );
@@ -93,6 +98,13 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                 } catch (Exception e) {
                     Log.d(getName(), "Export error");
                     e.printStackTrace();
+
+                    if (improvedErrorHandling) {
+                        String className = e.getClass().getSimpleName();
+                        promise.reject(className, className + ": " + e.getMessage());
+                        return;
+                    }
+
                     promise.reject(e);
                 }
             }
