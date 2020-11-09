@@ -42,7 +42,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void exportVideo(final String url, boolean improvedErrorHandling, final Promise promise) {
+    public void exportVideo(final String url, final Promise promise) {
         Log.d(getName(), "exportVideo");
 
         Thread exportThread = new Thread(new Runnable() {
@@ -79,9 +79,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         Log.d(getName(), "Read error");
                         e.printStackTrace();
 
-                        if (improvedErrorHandling) {
-                            throw e;
-                        }
+                        throw e;
                     }
 
                     CacheUtil.getCached(
@@ -98,11 +96,9 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     Log.d(getName(), "Export error");
                     e.printStackTrace();
 
-                    if (improvedErrorHandling) {
-                        String className = e.getClass().getSimpleName();
-                        promise.reject(className, className + ": " + e.getMessage());
-                        return;
-                    }
+                    String className = e.getClass().getSimpleName();
+                    promise.reject(className, className + ": " + e.getMessage());
+                    return;
 
                     promise.reject(e);
                 }
