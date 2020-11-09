@@ -54,10 +54,10 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                 final DataSpec dataSpec = new DataSpec(uri, 0, C.LENGTH_UNSET, null);
                 final SimpleCache downloadCache = ExoPlayerCache.getInstance(getReactApplicationContext());
                 CacheKeyFactory cacheKeyFactory = ds -> CACHE_KEY_PREFIX + "." + CacheUtil.generateKey(ds.uri);;
-                
+
                 try {
                     CacheUtil.getCached(
-                        dataSpec, 
+                        dataSpec,
                         downloadCache,
                         cacheKeyFactory
                     );
@@ -66,7 +66,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                     File targetFile = new File(ExoPlayerCache.getCacheDir(getReactApplicationContext()) + "/" + uri.getLastPathSegment());
                     OutputStream outStream = new FileOutputStream(targetFile);
-                    
+
                     byte[] buffer = new byte[8 * 1024];
                     int bytesRead;
                     try {
@@ -78,10 +78,12 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         // TODO this exception should not be thrown
                         Log.d(getName(), "Read error");
                         e.printStackTrace();
+
+                        throw e;
                     }
 
                     CacheUtil.getCached(
-                        dataSpec, 
+                        dataSpec,
                         downloadCache,
                         cacheKeyFactory
                     );
@@ -93,6 +95,11 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                 } catch (Exception e) {
                     Log.d(getName(), "Export error");
                     e.printStackTrace();
+
+                    String className = e.getClass().getSimpleName();
+                    promise.reject(className, className + ": " + e.getMessage());
+                    return;
+
                     promise.reject(e);
                 }
             }
