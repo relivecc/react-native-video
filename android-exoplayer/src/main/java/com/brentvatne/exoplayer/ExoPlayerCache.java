@@ -99,8 +99,6 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     String className = e.getClass().getSimpleName();
                     promise.reject(className, className + ": " + e.getMessage());
                     return;
-
-                    promise.reject(e);
                 }
             }
         }, "export_thread");
