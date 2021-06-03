@@ -65,6 +65,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     );
 
                     DataSourceInputStream inputStream = new DataSourceInputStream(createDataSource(downloadCache), dataSpec);
+
                     File targetFile = new File(ExoPlayerCache.getCacheDir(getReactApplicationContext()) + "/" + uri.getLastPathSegment());
                     OutputStream outStream = new FileOutputStream(targetFile);
 
@@ -81,10 +82,6 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                         e.printStackTrace();
 
                         throw e;
-                    } finally {
-                        inputStream.close();
-                        outStream.flush();
-                        outStream.close();
                     }
 
                     CacheUtil.getCached(
@@ -94,7 +91,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                     );
 
                     if (!targetFile.exists()) {
-                        throw new Exception("Target file not present after creation");
+                        throw new Exception("Target file not present after writing bytes");
                     }
 
                     Log.d(getName(), "Export succeeded");
