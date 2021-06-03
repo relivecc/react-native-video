@@ -21,9 +21,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m}"
   s.static_framework = true
 
-  s.dependency "React-Core"
-
-  s.xcconfig = {
-    'OTHER_LDFLAGS': '-ObjC',
-  }
+  s.dependency "React"
 end

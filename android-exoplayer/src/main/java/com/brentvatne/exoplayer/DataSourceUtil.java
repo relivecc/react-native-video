@@ -22,7 +22,6 @@ public class DataSourceUtil {
 
     private static DataSource.Factory rawDataSourceFactory = null;
     private static DataSource.Factory defaultDataSourceFactory = null;
-    private static HttpDataSource.Factory defaultHttpDataSourceFactory = null;
     private static String userAgent = null;
 
     public static void setUserAgent(String userAgent) {
@@ -57,17 +56,6 @@ public class DataSourceUtil {
 
     public static void setDefaultDataSourceFactory(DataSource.Factory factory) {
         DataSourceUtil.defaultDataSourceFactory = factory;
-    }
-
-    public static HttpDataSource.Factory getDefaultHttpDataSourceFactory(ReactContext context, DefaultBandwidthMeter bandwidthMeter, Map<String, String> requestHeaders) {
-        if (defaultHttpDataSourceFactory == null || (requestHeaders != null && !requestHeaders.isEmpty())) {
-            defaultHttpDataSourceFactory = buildHttpDataSourceFactory(context, bandwidthMeter, requestHeaders);
-        }
-        return defaultHttpDataSourceFactory;
-    }
-
-    public static void setDefaultHttpDataSourceFactory(HttpDataSource.Factory factory) {
-        DataSourceUtil.defaultHttpDataSourceFactory = factory;
     }
 
     private static DataSource.Factory buildRawDataSourceFactory(ReactContext context) {
