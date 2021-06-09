@@ -167,17 +167,18 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
                             // TODO Add onProgress() callback here
                         }
 
-                        CacheUtil.getCached(
-                                dataSpec,
-                                downloadCache,
-                                cacheKeyFactory
-                        );
                     } finally {
                         if (outStream != null) {
                             // Flush streams and release system resources
                             outStream.close();
                         }
                     }
+
+                    CacheUtil.getCached(
+                        dataSpec,
+                        downloadCache,
+                        cacheKeyFactory
+                    );
 
                     if (!targetFile.exists()) {
                         throw new Exception("Target file bytes (" + bytesRead + ") not present after writing `" + targetFile.getPath() + "`");
