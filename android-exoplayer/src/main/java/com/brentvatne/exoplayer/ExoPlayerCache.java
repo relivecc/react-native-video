@@ -99,8 +99,6 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
                     WritableMap result =  Arguments.createMap();
                     result.putString("path", targetFile.getPath());
-                    result.putDouble("bytesRead", inputStream.bytesRead());
-                    result.putDouble("bytesWritten", targetFile.length());
 
                     promise.resolve(result);
                 } catch (Exception e) {
