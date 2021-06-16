@@ -116,7 +116,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     public static SimpleCache getInstance(Context context) {
         if(instance == null) {
-            instance = new SimpleCache(new File(ExoPlayerCache.getCacheDir(context)), new NoOpCacheEvictor());
+            instance = new SimpleCache(new File(ExoPlayerCache.getCacheDir(context) + "/exo_player"), new NoOpCacheEvictor());
         }
         return instance;
     }
