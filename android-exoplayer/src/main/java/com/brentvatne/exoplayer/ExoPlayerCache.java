@@ -7,7 +7,7 @@ import android.util.Log;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
+import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.upstream.cache.CacheUtil;
@@ -17,10 +17,8 @@ import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSourceInputStream;
 
-import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
@@ -33,6 +31,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     private static SimpleCache instance = null;
     private static final String CACHE_KEY_PREFIX = "exoPlayerCacheKeyPrefix";
+    private static final long MAX_CACHE_SIZE_BYTES = 400 * (1024 * 1024); // => 400 MB
 
     public ExoPlayerCache(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -116,7 +115,10 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     public static SimpleCache getInstance(Context context) {
         if(instance == null) {
-            instance = new SimpleCache(new File(ExoPlayerCache.getCacheDir(context) + "/exo_player"), new NoOpCacheEvictor());
+            instance = new SimpleCache(
+                new File(ExoPlayerCache.getCacheDir(context) + "/exo_player"),
+                new LeastRecentlyUsedCacheEvictor(MAX_CACHE_SIZE_BYTES)
+            );
         }
         return instance;
     }
