@@ -33,6 +33,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     private static SimpleCache instance = null;
     private static final String CACHE_KEY_PREFIX = "exoPlayerCacheKeyPrefix";
     private static long maxCacheSizeBytes = -1; // Default no maximum size
+    private static String cacheSubDirectory = "";
 
     public ExoPlayerCache(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -46,7 +47,13 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setMaxCacheSize(final int bytes, final Promise promise) {
         maxCacheSizeBytes = bytes;
-        promise.resolve(bytes);
+        promise.resolve(maxCacheSizeBytes);
+    }
+
+    @ReactMethod
+    public void setCacheSubDirectory(final String directory, final Promise promise) {
+        cacheSubDirectory = directory;
+        promise.resolve(cacheSubDirectory);
     }
 
     @ReactMethod
@@ -123,7 +130,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     public static SimpleCache getInstance(Context context) {
         if(instance == null) {
             instance = new SimpleCache(
-                new File(ExoPlayerCache.getCacheDir(context) + "/exo_player"),
+                new File(ExoPlayerCache.getCacheDir(context) + cacheSubDirectory),
                 maxCacheSizeBytes == -1
                     ? new NoOpCacheEvictor()
                     : new LeastRecentlyUsedCacheEvictor(maxCacheSizeBytes)
