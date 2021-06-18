@@ -32,7 +32,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     private static SimpleCache instance = null;
     private static final String CACHE_KEY_PREFIX = "exoPlayerCacheKeyPrefix";
-    private static long maxCacheSizeBytes = -1; // Default no maximum size
+    private static int maxCacheSizeBytes = -1; // Default no maximum size
     private static String cacheSubDirectory = "";
 
     public ExoPlayerCache(ReactApplicationContext reactContext) {
