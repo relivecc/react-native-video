@@ -9,6 +9,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.Cache;
+import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.upstream.cache.CacheUtil;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
@@ -31,7 +32,7 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
 
     private static SimpleCache instance = null;
     private static final String CACHE_KEY_PREFIX = "exoPlayerCacheKeyPrefix";
-    private static final long MAX_CACHE_SIZE_BYTES = 380 * (1024 * 1024); // => 380 MB
+    private static long maxCacheSizeBytes = -1; // Default no maximum size
 
     public ExoPlayerCache(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -40,6 +41,12 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "ExoPlayerCache";
+    }
+
+    @ReactMethod
+    public void setMaxCacheSize(final int bytes, final Promise promise) {
+        maxCacheSizeBytes = bytes;
+        promise.resolve(bytes);
     }
 
     @ReactMethod
@@ -117,7 +124,9 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
         if(instance == null) {
             instance = new SimpleCache(
                 new File(ExoPlayerCache.getCacheDir(context) + "/exo_player"),
-                new LeastRecentlyUsedCacheEvictor(MAX_CACHE_SIZE_BYTES)
+                maxCacheSizeBytes == -1
+                    ? new NoOpCacheEvictor()
+                    : new LeastRecentlyUsedCacheEvictor(maxCacheSizeBytes)
             );
         }
         return instance;
